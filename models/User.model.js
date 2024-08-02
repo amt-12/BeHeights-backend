@@ -21,11 +21,14 @@ const UserSchema = new Schema(
     password: {
       type: String,
     },
-    role: {
-      enum: ["Admin", "Customer"],
-      type: String,
-      default: "Customer",
+    otp: {
+      type: Number,
     },
+    // role: {
+    //   enum: ["Admin", "Customer"],
+    //   type: String,
+    //   default: "Customer",
+    // },
   },
   {
     timestamps: true,

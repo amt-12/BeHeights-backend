@@ -9,6 +9,7 @@ const productRoutes = require("./Product.route");
 const addProductNameRoutes = require("./AddProductName.route");
 const feebackRoutes = require("./Feedback.route");
 const ResponseRoutes = require("./Response.route");
+const getbill = require("./GetOtp.route");
 
 router.use("/auth", authRoutes);
 router.use("/user", userRoutes);
@@ -20,6 +21,7 @@ router.use("/product", productRoutes);
 router.use("/addProductName", addProductNameRoutes);
 router.use("/feedback", feebackRoutes);
 router.use("/response", ResponseRoutes);
+router.use('/verify', getbill);
 
 router.get("/ping", (req, res) => {
   res.json({ success: "true", message: "successful request" });

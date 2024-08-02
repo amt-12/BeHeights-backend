@@ -10,6 +10,6 @@ router.post("/register", register);
 router.post("/login", loginUser);
 router.post("/sendOtp", sendOtp);
 router.post("/resetPassword/:token", resetPassword);
-router.post("/verifyOtp/:token", verifyOtp);
+router.post("/verifyOtp", verifyOtp);
 
 module.exports = router;

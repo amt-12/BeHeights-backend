@@ -29,7 +29,7 @@ const categoryValidation = Joi.object({
 const productValidation = Joi.object({
   name: Joi.string().required(),
   // subProductNameId: Joi.string().required(),
-  // description: Joi.string().required(),
+  description: Joi.string().required(),
   // categoryId: Joi.string().required(),
   // subCategoryId: Joi.string().required(),
   price: Joi.number().required(),
