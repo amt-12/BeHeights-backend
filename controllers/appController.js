@@ -9,9 +9,17 @@ const getbill = (req, res) => {
       error: "Email is required",
     });
   }
-
-  // Generate a random OTP
-  const otp = crypto.randomInt(100000, 999999).toString();
+  const generateOTP = () => {
+    var digits = "0123456789";
+    var otpLength = 4;
+    var otp = "";
+    for (let i = 1; i <= otpLength; i++) {
+      var index = Math.floor(Math.random() * digits.length);
+      otp = otp + digits[index];
+    }
+    return otp;
+  };
+    const otp = generateOTP();
 
   let config = {
     service: "gmail",

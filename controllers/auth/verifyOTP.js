@@ -3,28 +3,28 @@ const User = require("../../models/User.model");
 const sendEmail = require("../../services/sendEmail");
 const createError = require("http-errors");
 
-const verifyOTP = async (req, res, next) => {
+const verifyOtp = async (req, res, next) => {
   try {
-    const { token } = req.params;
-    let buff = Buffer.from(token, "base64");
-    let text = buff.toString("ascii");
-    const [email, otp] = text.split(":");
-    const verifyotp = await ResetPassword.findOne({
-      email: email,
-      otp: otp,
-      isVerified: false,
-    }).exec();
-    if (!verifyotp) {
-      throw createError.BadRequest("OTP is invalid or it may be expired!");
+    const { email, otp } = req.body;
+
+    const resetotp = await ResetPassword.findOne({
+      email,
+      otp,
+    });
+    console.log(resetotp?.otp);
+    if (resetotp?.otp === otp) {
+      res.status(200).json({
+        message: "OTP Verified Successfully, please Login !",
+        success: true,
+        statusText: "OK",
+      });
+    } else if (resetotp?.otp !== otp) {
+      res.status(500).json({
+        message: "Invalid OTP !",
+      });
     }
-
-    verifyotp.isVerified = true;
-    await verifyotp.save();
-
-    res.status(200).send({ message: "OTP verified successfully" });
   } catch (error) {
     next(error);
   }
 };
-
-module.exports = verifyOTP;
+module.exports = verifyOtp;
