@@ -19,12 +19,6 @@ const sendOtp = async (req, res, next) => {
       email,
     });
     await resetotp.save();
-    // await sendEmail.sendEmail(
-    //   [email],
-    //   `ONE TIME PASSWORD (OTP) - CONFIRMATION`,
-    //   OTP(user.firstName, user.lastName, otp)
-    // );
-
     res.status(200).send({ message: "OTP sent successfully", otp });
   } catch (err) {
     next(err);

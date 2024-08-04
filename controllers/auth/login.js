@@ -15,8 +15,8 @@ const loginUser = async (req, res, next) => {
     const result = await loginValidation.validateAsync(req.body);
     const { email, password } = result;
 
-    const userLogin = await User.findOne({ email });
-    if (!userLogin) throw createError.BadRequest("Email is not registered");
+    const userLogin = await User.findOne({ email, isVerified: true });
+    if (!userLogin) throw createError.BadRequest("Email is not registered or not verified");
     const isMatch = await bcrypt.compare(password, userLogin.password);
     if (!isMatch) {
       throw createError.BadRequest("Incorrect password. Please try again.");
@@ -26,6 +26,7 @@ const loginUser = async (req, res, next) => {
       _id: userLogin._id,
       phone: userLogin.phone,
       email: userLogin.email,
+      role: userLogin.role, 
     };
 
     const accessToken = generateAccessToken(payload, accessTokenLife);
@@ -43,7 +44,6 @@ const loginUser = async (req, res, next) => {
         success: true,
         accessToken,
         user: payload,
-        message:"goood"
       });
     }
   } catch (error) {

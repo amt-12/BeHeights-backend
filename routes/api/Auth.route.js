@@ -5,11 +5,16 @@ const loginUser = require("../../controllers/auth/login");
 const resetPassword = require("../../controllers/auth/resetPassword");
 const verifyOtp = require("../../controllers/auth/verifyOTP");
 const sendOtp = require("../../controllers/auth/sendOtp");
+const registerOtp = require("../../controllers/auth/registerOtp");
+const verifyDirectOTP = require("../../controllers/auth/verifyDirectOTP");
 
 router.post("/register", register);
+router.post("/registerOtp", registerOtp);
 router.post("/login", loginUser);
 router.post("/sendOtp", sendOtp);
 router.post("/resetPassword/:token", resetPassword);
 router.post("/verifyOtp", verifyOtp);
+router.post("/verifyDirectOtp", verifyDirectOTP);
+
 
 module.exports = router;

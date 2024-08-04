@@ -7,6 +7,9 @@ const registerValidation = Joi.object({
   password: Joi.string().required().min(3).max(50),
 });
 
+const OtpValidation = Joi.object({
+  email: Joi.string().email().required(),
+});
 const updateProspectValidation = Joi.object({
   status: Joi.string().required(),
   rejectionCause: Joi.string().allow(""),
@@ -201,4 +204,5 @@ module.exports = {
   skuValidation,
   paymentValidation,
   loginAdminValidation,
+  OtpValidation
 };

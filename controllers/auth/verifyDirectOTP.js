@@ -1,7 +1,8 @@
 const Otp = require("../../models/Otp.model");
 const User = require("../../models/User.model"); // Import User model
+const UserOtpModel = require("../../models/UserOtp.model");
 
-const verifyOtp = async (req, res, next) => {
+const verifyDirectOTP = async (req, res, next) => {
   try {
     const { email, otp } = req.body;
 
@@ -13,8 +14,8 @@ const verifyOtp = async (req, res, next) => {
     console.log(resetotp?.otp);
     if (resetotp?.otp === otp) {
       // Update User model with isVerified set to true
-      const user = await User.findOneAndUpdate({ email }, { isVerified: true }, { new: true });
-      if (!user) {
+      const userDirect = await UserOtpModel.findOneAndUpdate({ email }, { isVerified: true }, { new: true });
+      if (!userDirect) {
         return res.status(404).json({ message: "User not found" });
       }
       res.status(200).json({
@@ -31,4 +32,4 @@ const verifyOtp = async (req, res, next) => {
     next(error);
   }
 };
-module.exports = verifyOtp;
+module.exports = verifyDirectOTP;

@@ -2,16 +2,6 @@ const { Schema, model } = require("mongoose");
 
 const UserSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-
-    phone: {
-      type: String,
-      required: true,
-    },
-
     email: {
       type: String,
       lowercase: true,
@@ -20,15 +10,25 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
+      required: true,
+  },
+    name: {
+      type: String,
+      required: true,
     },
-    otp: {
-      type: Number,
+    phone: {
+      type: String,
+      required: true,
     },
-    // role: {
-    //   enum: ["Admin", "Customer"],
-    //   type: String,
-    //   default: "Customer",
-    // },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
