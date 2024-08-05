@@ -35,7 +35,10 @@ const productValidation = Joi.object({
   subOffer:Joi.string().required(),
   uniqueCode:Joi.string().required(),
 });
+const CouponValidation = Joi.object({
 
+  uniqueCode:Joi.string().required(),
+});
 const orderValidation = Joi.object({
   productData: Joi.array().required(),
   paymentmethod: Joi.string().allow(""),
@@ -201,5 +204,6 @@ module.exports = {
   skuValidation,
   paymentValidation,
   loginAdminValidation,
-  OtpValidation
+  OtpValidation,
+  CouponValidation
 };

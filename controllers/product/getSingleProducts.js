@@ -5,6 +5,7 @@ const { ObjectId } = require("mongoose").Types;
 const getSingleProducts = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const uniqueCode = req.query.uniqueCode; // assuming the unique code is passed as a query parameter
 
     const product = await Product.aggregate([
       {
@@ -26,102 +27,22 @@ const getSingleProducts = async (req, res, next) => {
           preserveNullAndEmptyArrays: true,
         },
       },
-      // {
-      //   $lookup: {
-      //     from: "addProductName",
-      //     localField: "subProductNameId",
-      //     foreignField: "_id",
-      //     as: "subProductName",
-      //   },
-      // },
-      // {
-      //   $unwind: {
-      //     path: "$subProductName",
-      //     preserveNullAndEmptyArrays: true,
-      //   },
-      // },
-      {
-        $lookup: {
-          from: "categories",
-          localField: "categoryId",
-          foreignField: "_id",
-          as: "category",
-        },
-      },
-      {
-        $unwind: {
-          path: "$category",
-        },
-      },
-      {
-        $lookup: {
-          from: "categories",
-          localField: "subCategoryId",
-          foreignField: "_id",
-          as: "subCategory",
-        },
-      },
-      {
-        $unwind: {
-          path: "$subCategory",
-        },
-      },
-
-      {
-        $lookup: {
-          from: "feedbacks",
-          localField: "_id",
-          foreignField: "productId",
-          as: "feedbacks",
-        },
-      },
-
+      // ... other lookup and unwind stages ...
       {
         $addFields: {
-          averageRating: { $avg: "$feedbacks.rating" },
-        },
-      },
-
-      {
-        $addFields: {
-          averageRating: { $round: ["$averageRating", 1] },
-        },
-      },
-
-      {
-        $lookup: {
-          from: "cart",
-          localField: "_id",
-          foreignField: "productId",
-          as: "cart",
-        },
-      },
-
-      {
-        $addFields: {
-          isAddedToCart: {
-            $in: ["$_id", "$cart.productId"],
+          isVerified: {
+            $eq: ["$uniqueCode", uniqueCode],
           },
         },
       },
-
-      {
-        $lookup: {
-          from: "wishLists",
-          localField: "_id",
-          foreignField: "productId",
-          as: "wishlist",
-        },
-      },
-
-      {
-        $addFields: {
-          isAddedToWishList: {
-            $in: ["$_id", "$wishlist.productId"],
-          },
-        },
-      },
+      // ... other addFields stages ...
     ]);
+
+    if (product[0].isVerified) {
+      // update the product document to set isVerified to true
+      await Product.updateOne({ _id: ObjectId(id) }, { $set: { isVerified: true } });
+    }
+
     res.json({
       success: true,
       status: 200,

@@ -29,6 +29,10 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
+    isAvail: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

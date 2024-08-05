@@ -7,6 +7,7 @@ const deleteImage = require("../../controllers/product/deleteImage");
 const statusCount = require("../../controllers/product/productStats");
 const validateAccessToken = require("../../middlewares/jwtValidation");
 const statusChange = require("../../controllers/product/productStatus");
+const availCoupon = require("../../controllers/product/availCoupon");
 
 const router = require("express").Router();
 
@@ -17,5 +18,6 @@ router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
 router.get("/", getProducts);
 router.get("/:id", getSingleProducts);
+router.post("/avail", availCoupon);
 router.delete("/:productId/:imageId", deleteImage);
 module.exports = router;
