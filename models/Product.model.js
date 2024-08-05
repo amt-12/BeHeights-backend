@@ -25,6 +25,10 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
+    uniqueCode: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

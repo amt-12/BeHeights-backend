@@ -33,6 +33,7 @@ const productValidation = Joi.object({
   resturantName:Joi.string().required(),
   offer:Joi.string().required(),
   subOffer:Joi.string().required(),
+  uniqueCode:Joi.string().required(),
 });
 
 const orderValidation = Joi.object({
