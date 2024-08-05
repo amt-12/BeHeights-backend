@@ -30,13 +30,9 @@ const categoryValidation = Joi.object({
   parent: Joi.string(),
 });
 const productValidation = Joi.object({
-  name: Joi.string().required(),
-  // subProductNameId: Joi.string().required(),
-  description: Joi.string().required(),
-  // categoryId: Joi.string().required(),
-  // subCategoryId: Joi.string().required(),
-  price: Joi.number().required(),
-  // inventory: Joi.number().required(),
+  resturantName:Joi.string().required(),
+  offer:Joi.string().required(),
+  subOffer:Joi.string().required(),
 });
 
 const orderValidation = Joi.object({

@@ -4,12 +4,12 @@ const uploadFiles = require("../../services/upload-files");
 
 const addProduct = async (req, res, next) => {
   try {
-    const { price, name, description } = req.body;
+    const { offer, subOffer, resturantName } = req.body;
 
     const result = await productValidation.validateAsync({
-      price,
-      name,
-      description,
+      offer,
+      subOffer,
+      resturantName,
     });
     const product = new Product(result);
     await product.save();

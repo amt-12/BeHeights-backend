@@ -13,12 +13,16 @@ const ProductMedia = new Schema({
 
 const ProductSchema = new Schema(
   {
-    description: {
+    offer: {
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
+    resturantName: {
+      type: String,
+      required: true,
+    },
+    subOffer: {
+      type: String,
       required: true,
     },
   },
