@@ -6,7 +6,16 @@ const registerValidation = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required().min(3).max(50),
 });
-
+const businessValidation = Joi.object({
+  businessName: Joi.string().required(),
+  typeOfBusiness: Joi.string().required(),
+  location: Joi.string().required(),
+  typeOfFood: Joi.string().required().min(3).max(50),
+});
+const updateValidation = Joi.object({
+  email: Joi.string().email().required(),
+  newEmail: Joi.string().email().required(),
+});
 const OtpValidation = Joi.object({
   email: Joi.string().email().required(),
 });
@@ -36,7 +45,6 @@ const productValidation = Joi.object({
   uniqueCode:Joi.string().required(),
 });
 const CouponValidation = Joi.object({
-
   uniqueCode:Joi.string().required(),
 });
 const orderValidation = Joi.object({
@@ -205,5 +213,7 @@ module.exports = {
   paymentValidation,
   loginAdminValidation,
   OtpValidation,
-  CouponValidation
+  CouponValidation,
+  updateValidation,
+  businessValidation
 };

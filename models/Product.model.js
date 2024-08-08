@@ -33,6 +33,10 @@ const ProductSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    isExpired: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

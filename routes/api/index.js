@@ -10,6 +10,11 @@ const addProductNameRoutes = require("./AddProductName.route");
 const feebackRoutes = require("./Feedback.route");
 const ResponseRoutes = require("./Response.route");
 const getbill = require("./GetOtp.route");
+const getbanner = require("./Banner.route");
+const addBusiness = require("./Business.route");
+
+
+
 
 router.use("/auth", authRoutes);
 router.use("/user", userRoutes);
@@ -22,6 +27,10 @@ router.use("/addProductName", addProductNameRoutes);
 router.use("/feedback", feebackRoutes);
 router.use("/response", ResponseRoutes);
 router.use('/verify', getbill);
+router.use('/banner', getbanner);
+router.use('/addBusiness', addBusiness);
+
+
 
 router.get("/ping", (req, res) => {
   res.json({ success: "true", message: "successful request" });
