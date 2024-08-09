@@ -78,7 +78,7 @@ const getBanners = async (req, res, next) => {
     res.json({
       success: true,
       status: 200,
-      message: "Banners fetched successfully",
+      message: "Only one banner kept in the database",
       count: banners?.[0]?.count?.[0]?.total,
       activeCount:
         !!banners?.[0]?.activeCount?.[0]?.active === false

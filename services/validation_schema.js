@@ -11,10 +11,16 @@ const businessValidation = Joi.object({
   typeOfBusiness: Joi.string().required(),
   location: Joi.string().required(),
   typeOfFood: Joi.string().required().min(3).max(50),
+  cost:Joi.number().required()
 });
 const updateValidation = Joi.object({
   email: Joi.string().email().required(),
   newEmail: Joi.string().email().required(),
+});
+const bannerValidation = Joi.object({
+  quote: Joi.string().required(),
+  specialOffer: Joi.string().required(),
+  code: Joi.string().required(),
 });
 const OtpValidation = Joi.object({
   email: Joi.string().email().required(),
@@ -204,6 +210,7 @@ module.exports = {
   registerValidation,
   loginValidation,
   updateProspectValidation,
+  bannerValidation,
   categoryValidation,
   productValidation,
   wishlistValidation,

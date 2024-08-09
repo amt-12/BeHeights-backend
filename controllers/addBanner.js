@@ -1,25 +1,31 @@
 const express = require('express');
 const Banner = require("../models/Banner.model");
+const { bannerValidation } = require('../services/validation_schema');
 
 const router = express.Router();
 
 const addBanner = async (req, res, next) => {
   try {
-    const { quote, specialOffer } = req.body;
-    if (!quote || !specialOffer) {
+    const updateBanner = await bannerValidation.validateAsync(req.body);
+    const { quote, specialOffer,code } = updateBanner;
+    if (!updateBanner) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide both quote and special offer',
+        message: 'Please provide banner details',
       });
     }
-
-    // Save banner details to database (e.g., MongoDB)
-    const banner = await Banner.create({ quote, specialOffer });
-
-    res.status(201).json({
+    const banner = new Banner({
+      quote,
+      specialOffer,
+      code
+    });
+    await banner.save();
+    res.status(200).json({
       success: true,
       message: 'Banner details added successfully',
-      data: banner,
+      quote:quote,
+      specialOffer:specialOffer,
+      code:code
     });
   } catch (error) {
     next(error);
