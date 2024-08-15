@@ -10,8 +10,9 @@ const businessValidation = Joi.object({
   businessName: Joi.string().required(),
   typeOfBusiness: Joi.string().required(),
   location: Joi.string().required(),
-  typeOfFood: Joi.string().required().min(3).max(50),
-  cost:Joi.number().required()
+  typeOfFood: Joi.array().items(Joi.string()).required(),
+  cost: Joi.array().items(Joi.string()).required(),
+  tableTime: Joi.array().items(Joi.string()).required(),
 });
 const updateValidation = Joi.object({
   email: Joi.string().email().required(),

@@ -17,14 +17,16 @@ const businessAllSchema = new mongoose.Schema({
     trim: true
   },
   typeOfFood: {
-    type: String,
-    required: true,
-    trim: true
+    type: [String],
+    required: true
   },
   cost: {
-    type: Number,
-    required: true,
-    trim: true
+    type: [Number],
+    required: true
+  },
+  tableTime: {
+    type: [String],
+    required: true
   }
 });
 
