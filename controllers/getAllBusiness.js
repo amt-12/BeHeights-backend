@@ -1,7 +1,6 @@
 const createError = require("http-errors");
 const BusinessAll = require("../models/BuisnessAll.model");
 
-
 const getAllBusinesses = async (req, res, next) => {
   try {
     const { name, keyword, status } = req.query;
@@ -22,10 +21,17 @@ const getAllBusinesses = async (req, res, next) => {
     }
 
     if (status) {
-      searchCriteria = {
-        ...searchCriteria,
-        isActive: status === "true" ? true : false,
-      };
+      if (status === "false") {
+        searchCriteria = {
+          ...searchCriteria,
+          isActive: false,
+        };
+      } else {
+        searchCriteria = {
+          ...searchCriteria,
+          isActive: true,
+        };
+      }
     }
 
     const businesses = await BusinessAll.aggregate([
@@ -72,8 +78,6 @@ const getAllBusinesses = async (req, res, next) => {
       },
     ]);
 
-    // const totalCount = await Business.countDocuments();
-
     res.json({
       success: true,
       status: 200,
@@ -88,7 +92,6 @@ const getAllBusinesses = async (req, res, next) => {
           ? 0
           : businesses?.[0]?.inactiveCount?.[0]?.inactive,
       businesses: businesses?.[0]?.data,
-
     });
   } catch (error) {
     next(error);

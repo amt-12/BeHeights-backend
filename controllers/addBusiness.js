@@ -8,16 +8,15 @@ const router = express.Router();
 const addBusiness = async (req, res, next) => {
   try {
     const business = await businessValidation.validateAsync(req.body);
-    const { businessName, typeOfBusiness, location, typeOfFood,cost,tableTime } = business ;
+    const { businessName, typeOfBusiness, location, typeOfFood,cost,tableTime,buffetPrice,isActive,images } = business ;
 
-    if (!businessName || !typeOfBusiness || !location || !typeOfFood || !cost) {
+    if (!businessName || !typeOfBusiness || !location  || !cost || !images) {
       return res.status(400).json({
         success: false,
         message: 'Please provide all the required fields',
       });
     }
 
-    // Check if business name already exists
     const existingBusiness = await BusinessAll.findOne({ businessName });
     if (existingBusiness) {
       return res.status(400).json({
@@ -32,7 +31,11 @@ const addBusiness = async (req, res, next) => {
       location,
       typeOfFood,
       cost,
-      tableTime
+      tableTime,
+      buffetPrice,
+      isActive,
+      images,
+
     });
     await businessData.save();
 

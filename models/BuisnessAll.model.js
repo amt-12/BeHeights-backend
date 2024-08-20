@@ -18,7 +18,6 @@ const businessAllSchema = new mongoose.Schema({
   },
   typeOfFood: {
     type: [String],
-    required: true
   },
   cost: {
     type: [Number],
@@ -26,6 +25,17 @@ const businessAllSchema = new mongoose.Schema({
   },
   tableTime: {
     type: [String],
+    required: true
+  },
+  buffetPrice: {
+    type: Number,
+  },
+  isActive: {
+    type: Boolean,
+    default: false
+  },
+  images: {
+    type: String,
     required: true
   }
 });

@@ -1,6 +1,6 @@
 const BusinessAll = require("../models/BuisnessAll.model");
 
-const getRestaurants = async (req, res, next) => {
+const getByTypeOfBusiness = async (req, res, next) => {
   try {
     const { query } = req;
     console.log(query)
@@ -9,13 +9,10 @@ const getRestaurants = async (req, res, next) => {
 
     let matchStage = {};
 
-    // if (query.typeOfBusiness) {
-    //   matchStage.typeOfBusiness = query.typeOfBusiness;
-    // }
-
-    if (query.location) {
-      matchStage.location = query.location;
+    if (query.typeOfBusiness) {
+      matchStage.typeOfBusiness = query.typeOfBusiness;
     }
+
   // if (query.buffetPrice === 200) {
   //   db.BusinessAll.find({ buffetPrice: 200 })}
     
@@ -54,4 +51,4 @@ const getRestaurants = async (req, res, next) => {
   }
 
 };
-module.exports = getRestaurants;
+module.exports = getByTypeOfBusiness;

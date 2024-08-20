@@ -1,6 +1,6 @@
 const BusinessAll = require("../models/BuisnessAll.model");
 
-const getRestaurants = async (req, res, next) => {
+const getByTableTime = async (req, res, next) => {
   try {
     const { query } = req;
     console.log(query)
@@ -9,19 +9,9 @@ const getRestaurants = async (req, res, next) => {
 
     let matchStage = {};
 
-    // if (query.typeOfBusiness) {
-    //   matchStage.typeOfBusiness = query.typeOfBusiness;
-    // }
-
-    if (query.location) {
-      matchStage.location = query.location;
+    if (query.tableTime === query.tableTime) {
+      matchStage.tableTime = { $eq: query.tableTime };
     }
-  // if (query.buffetPrice === 200) {
-  //   db.BusinessAll.find({ buffetPrice: 200 })}
-    
-    // if (query.tableTime === query.tableTime) {
-    //   matchStage.tableTime = { $eq: query.tableTime };
-    // }
     const restaurants = await BusinessAll.aggregate([
       {
         $match: matchStage,
@@ -54,4 +44,4 @@ const getRestaurants = async (req, res, next) => {
   }
 
 };
-module.exports = getRestaurants;
+module.exports = getByTableTime;
