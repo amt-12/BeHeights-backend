@@ -7,15 +7,27 @@ const registerValidation = Joi.object({
   password: Joi.string().required().min(3).max(50),
 });
 const businessValidation = Joi.object({
-  businessName: Joi.string().required(),
-  typeOfBusiness: Joi.string().required(),
-  location: Joi.string().required(),
+  businessName: Joi.string(),
+  typeOfBusiness: Joi.string(),
+  location: Joi.string(),
   typeOfFood: Joi.array().items(Joi.string()),
-  cost: Joi.array().items(Joi.string()).required(),
-  tableTime: Joi.array().items(Joi.string()).required(),
+  cost: Joi.array().items(Joi.string()),
+  tableTime: Joi.array().items(Joi.string()),
   buffetPrice: Joi.number(),
   isActive:Joi.boolean(),
-  images: Joi.string().required(),
+  images: Joi.string(),
+  businessOff: Joi.number(),
+  offerTitle: Joi.string(),
+  offerPrice: Joi.number(),
+  offerDetail: Joi.string(),
+  validTill: Joi.date(),
+  coupon:Joi.array().items(Joi.string()),
+  validFor: Joi.string(),
+});
+const businessCouponValidation = Joi.object().keys({
+  offerName: Joi.string(),
+  offerDescription: Joi.string(),
+  offerDiscount: Joi.number(),
 });
 const updateValidation = Joi.object({
   email: Joi.string().email().required(),
@@ -226,5 +238,6 @@ module.exports = {
   OtpValidation,
   CouponValidation,
   updateValidation,
-  businessValidation
+  businessValidation,
+  businessCouponValidation
 };

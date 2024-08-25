@@ -9,9 +9,19 @@ const getByTableTime = async (req, res, next) => {
 
     let matchStage = {};
 
-    if (query.tableTime === query.tableTime) {
+    if (query.tableTime && query.location) {
+      matchStage = {
+        $and: [
+          { tableTime: { $eq: query.tableTime } },
+          { location: { $eq: query.location } }
+        ]
+      };
+    } else if (query.tableTime) {
       matchStage.tableTime = { $eq: query.tableTime };
+    } else if (query.location) {
+      matchStage.location = { $eq: query.location };
     }
+
     const restaurants = await BusinessAll.aggregate([
       {
         $match: matchStage,
@@ -21,7 +31,6 @@ const getByTableTime = async (req, res, next) => {
           data: [
             { $skip: startIndex },
             { $limit: parseInt(viewSize) },
-            
           ],
           count: [
             {
@@ -30,8 +39,8 @@ const getByTableTime = async (req, res, next) => {
           ],
         },
       },
-
     ]);
+
     res.json({
       success: true,
       status: 200,
@@ -42,6 +51,6 @@ const getByTableTime = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-
 };
+
 module.exports = getByTableTime;

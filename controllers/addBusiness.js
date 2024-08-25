@@ -8,7 +8,7 @@ const router = express.Router();
 const addBusiness = async (req, res, next) => {
   try {
     const business = await businessValidation.validateAsync(req.body);
-    const { businessName, typeOfBusiness, location, typeOfFood,cost,tableTime,buffetPrice,isActive,images } = business ;
+    const { businessName, typeOfBusiness, location, typeOfFood,cost,tableTime,buffetPrice,isActive,images, businessOff,offerTitle,offerPrice,offerDetail,validTill,validFor } = business ;
 
     if (!businessName || !typeOfBusiness || !location  || !cost || !images) {
       return res.status(400).json({
@@ -35,7 +35,12 @@ const addBusiness = async (req, res, next) => {
       buffetPrice,
       isActive,
       images,
-
+      businessOff,
+      offerTitle,
+      offerPrice,
+      offerDetail,
+      validTill,
+      validFor,
     });
     await businessData.save();
 

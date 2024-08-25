@@ -21,7 +21,7 @@ const getAllBusinesses = async (req, res, next) => {
     }
 
     if (status) {
-      if (status === "false") {
+      if (status === false) {
         searchCriteria = {
           ...searchCriteria,
           isActive: false,
