@@ -67,11 +67,11 @@ const productValidation = Joi.object({
   uniqueCode:Joi.string().required(),
 });
 const exclusiveOfferValidation = Joi.object({
-  resturantName:Joi.string().required(),
-  location:Joi.string().required(),
-  offer:Joi.string().required(),
-  subOffer:Joi.string().required(),
-  uniqueCode:Joi.string().required(),
+  resturantName:Joi.string(),
+  location:Joi.string(),
+  offer:Joi.string(),
+  subOffer:Joi.string(),
+  uniqueCode:Joi.string(),
   location:Joi.string()
 });
 const CouponValidation = Joi.object({

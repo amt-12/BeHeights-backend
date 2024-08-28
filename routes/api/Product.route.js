@@ -10,11 +10,15 @@ const statusChange = require("../../controllers/product/productStatus");
 const availCoupon = require("../../controllers/product/availCoupon");
 const addExclusiveCoupon = require("../../controllers/product/addExclusiveCoupon");
 const getExclusiveOffers = require("../../controllers/product/getExclusiveOffers");
+const updateExclusiveCoupon = require("../../controllers/product/updateExclusiveCoupon");
+const deleteExclusiveOffer = require("../../controllers/product/deleteExclusiveOffer");
 
 const router = require("express").Router();
 
 router.post("/addProduct", addProduct);
-router.post("/addExclusiveCoupon/:location", addExclusiveCoupon);
+router.post("/addExclusiveCoupon", addExclusiveCoupon);
+router.post("/updateExclusiveCoupon/:id", updateExclusiveCoupon);
+router.delete("/deleteExclusiveCoupon/:id", deleteExclusiveOffer);
 router.get('/exclusive-offers', getExclusiveOffers);
 router.put("/:id/status", statusChange);
 router.get("/stats/count", statusCount);
