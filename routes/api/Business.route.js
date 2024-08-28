@@ -17,6 +17,7 @@ const router = require('express').Router();
 
 
 router.post('/add', addBusiness);
+// router.post('/getCoupon', getCoupon);
 router.get('/get', getAllBusiness);
 router.get('/get/:id', getSingleBusiness);
 router.get('/getByLocation', getAllBusinessLocation);

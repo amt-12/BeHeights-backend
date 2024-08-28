@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 
-const ProductSchema = new Schema(
+const ExclusiveOffer = new Schema(
   {
     offer: {
       type: String,
@@ -27,8 +27,12 @@ const ProductSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    location:{
+      type:String,
+      required:true
+    }
   },
   { timestamps: true }
 );
 
-module.exports = model("Product", ProductSchema, "products");
+module.exports = model("ExclusiveOffer", ExclusiveOffer, "ExclusiveOffer");

@@ -8,10 +8,14 @@ const statusCount = require("../../controllers/product/productStats");
 const validateAccessToken = require("../../middlewares/jwtValidation");
 const statusChange = require("../../controllers/product/productStatus");
 const availCoupon = require("../../controllers/product/availCoupon");
+const addExclusiveCoupon = require("../../controllers/product/addExclusiveCoupon");
+const getExclusiveOffers = require("../../controllers/product/getExclusiveOffers");
 
 const router = require("express").Router();
 
 router.post("/addProduct", addProduct);
+router.post("/addExclusiveCoupon/:location", addExclusiveCoupon);
+router.get('/exclusive-offers', getExclusiveOffers);
 router.put("/:id/status", statusChange);
 router.get("/stats/count", statusCount);
 router.put("/:id", updateProduct);

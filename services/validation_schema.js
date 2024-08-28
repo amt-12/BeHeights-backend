@@ -66,6 +66,14 @@ const productValidation = Joi.object({
   subOffer:Joi.string().required(),
   uniqueCode:Joi.string().required(),
 });
+const exclusiveOfferValidation = Joi.object({
+  resturantName:Joi.string().required(),
+  location:Joi.string().required(),
+  offer:Joi.string().required(),
+  subOffer:Joi.string().required(),
+  uniqueCode:Joi.string().required(),
+  location:Joi.string()
+});
 const CouponValidation = Joi.object({
   uniqueCode:Joi.string().required(),
 });
@@ -239,5 +247,6 @@ module.exports = {
   CouponValidation,
   updateValidation,
   businessValidation,
-  businessCouponValidation
+  businessCouponValidation,
+  exclusiveOfferValidation
 };

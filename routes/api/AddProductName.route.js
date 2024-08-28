@@ -8,6 +8,7 @@ const getSubProductData = require("../../controllers/addProductName/getSubProduc
 const updateProductName = require("../../controllers/addProductName/updateProductName");
 const deleteProductName = require("../../controllers/addProductName/deleteProductName");
 const getSingleProductName = require("../../controllers/addProductName/getSingleProductName");
+const addExclusiveCoupon = require("../../controllers/product/addExclusiveCoupon");
 
 router.post("/addProduct", addProductName);
 router.get("/", getProductNameList);
