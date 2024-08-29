@@ -11,9 +11,9 @@ const deleteSubCategory = require("../../controllers/category/deleteSubCategory"
 const getSingleCategoryDetails = require("../../controllers/category/getSingleCategoryDetails");
 const getSubCategories = require("../../controllers/category/getSubCategories");
 
-router.post("/", addCategory);
+router.post("/add", addCategory);
 router.get("/subCategory", getSubCategories);
-router.get("/", getAllCategory);
+router.get("/getAllCategory", getAllCategory);
 router.put("/:id", updateCategory);
 router.delete("/:id", deleteCategory);
 router.get("/:id", getSingleCategory);

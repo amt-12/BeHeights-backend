@@ -24,7 +24,7 @@ const businessValidation = Joi.object({
   coupon:Joi.array().items(Joi.string()),
   validFor: Joi.string(),
 });
-const businessCouponValidation = Joi.object().keys({
+const businessCouponValidation = Joi.object({
   offerName: Joi.string(),
   offerDescription: Joi.string(),
   offerDiscount: Joi.number(),
@@ -34,9 +34,7 @@ const updateValidation = Joi.object({
   newEmail: Joi.string().email().required(),
 });
 const bannerValidation = Joi.object({
-  quote: Joi.string().required(),
-  specialOffer: Joi.string().required(),
-  code: Joi.string().required(),
+  images: Joi.string(),
 });
 const OtpValidation = Joi.object({
   email: Joi.string().email().required(),
@@ -65,6 +63,7 @@ const productValidation = Joi.object({
   offer:Joi.string().required(),
   subOffer:Joi.string().required(),
   uniqueCode:Joi.string().required(),
+  validTill:Joi.date().required(),
 });
 const exclusiveOfferValidation = Joi.object({
   resturantName:Joi.string(),
@@ -72,7 +71,8 @@ const exclusiveOfferValidation = Joi.object({
   offer:Joi.string(),
   subOffer:Joi.string(),
   uniqueCode:Joi.string(),
-  location:Joi.string()
+  location:Joi.string(),
+  validTill:Joi.date(),
 });
 const CouponValidation = Joi.object({
   uniqueCode:Joi.string().required(),

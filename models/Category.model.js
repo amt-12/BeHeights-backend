@@ -1,42 +1,15 @@
 const { Schema, model } = require("mongoose");
 
-const CategoryMedia = new Schema({
-  url: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-});
 const Category = new Schema(
   {
     name: {
       type: String,
       required: true,
     },
-    parent: {
-      type: Schema.Types.ObjectId,
-      ref: "ProductCategory",
-    },
-    child: {
-      type: Schema.Types.ObjectId,
-      ref: "ProductCategory",
-    },
-    createdBy: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-    value: {
+    images: {
       type: String,
-    },
-    media: [
-      {
-        type: CategoryMedia,
-        required: false,
-      },
-    ],
+      required: true,
+  },
   },
   {
     timestamps: true,

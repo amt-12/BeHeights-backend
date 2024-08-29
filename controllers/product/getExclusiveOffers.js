@@ -19,6 +19,21 @@ const getExclusiveOffers = async (req, res, next) => {
         $match: matchStage,
       },
     ]);
+
+    // Calculate days left for each product
+    exclusive.forEach((product) => {
+      const today = new Date();
+      const validTillDate = new Date(product.validTill); 
+      const timeDiff = validTillDate.getTime() - today.getTime();
+      const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24)); 
+
+      if (daysLeft === 0) {
+        product.daysLeft = `Today`;
+      } else {
+        product.daysLeft = daysLeft;
+      }
+    });
+
     res.json({
       success: true,
       status: 200,

@@ -30,7 +30,11 @@ const ExclusiveOffer = new Schema(
     location:{
       type:String,
       required:true
-    }
+    },
+    validTill: {
+      type: Date,
+      required: true,
+    },
   },
   { timestamps: true }
 );

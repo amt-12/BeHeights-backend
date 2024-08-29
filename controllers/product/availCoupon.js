@@ -15,7 +15,6 @@ const availCoupon = async (req, res, next) => {
     const couponUpdate = await Product.findOneAndUpdate(
       { uniqueCode },
       { isAvail: true },
-      
       { new: true },
 
     );

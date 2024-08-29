@@ -2,18 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const bannerSchema = new Schema(
   {
-    quote: {
+    images:{
       type: String,
       required: true,
-    },
-    code: {
-      type: String,
-      required: true,
-    },
-    specialOffer: {
-      type: String,
-      required: true,
-    },
+    }
   },
   {
     timestamps: true,

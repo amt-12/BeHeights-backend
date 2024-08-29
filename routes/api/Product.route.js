@@ -12,6 +12,7 @@ const addExclusiveCoupon = require("../../controllers/product/addExclusiveCoupon
 const getExclusiveOffers = require("../../controllers/product/getExclusiveOffers");
 const updateExclusiveCoupon = require("../../controllers/product/updateExclusiveCoupon");
 const deleteExclusiveOffer = require("../../controllers/product/deleteExclusiveOffer");
+const availExclusiveOffer = require("../../controllers/product/availExclusiveOffer");
 
 const router = require("express").Router();
 
@@ -27,5 +28,6 @@ router.delete("/:id", deleteProduct);
 router.get("/", getProducts);
 router.get("/:id", getSingleProducts);
 router.post("/avail", availCoupon);
+router.post("/availExclusiveOffer", availExclusiveOffer);
 router.delete("/:productId/:imageId", deleteImage);
 module.exports = router;

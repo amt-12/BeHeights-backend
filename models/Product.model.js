@@ -27,6 +27,10 @@ const ProductSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    validTill: {
+      type: Date,
+      required: true,
+    },
   },
   { timestamps: true }
 );

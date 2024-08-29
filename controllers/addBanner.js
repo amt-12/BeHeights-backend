@@ -1,31 +1,37 @@
-const express = require('express');
 const Banner = require("../models/Banner.model");
 const { bannerValidation } = require('../services/validation_schema');
 
-const router = express.Router();
-
 const addBanner = async (req, res, next) => {
   try {
-    const updateBanner = await bannerValidation.validateAsync(req.body);
-    const { quote, specialOffer,code } = updateBanner;
-    if (!updateBanner) {
+    const AddSwiper = await bannerValidation.validateAsync(req.body);
+    const { images } = AddSwiper ;
+
+    if (!images) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide banner details',
+        message: 'Please provide the required fields',
       });
     }
-    const banner = new Banner({
-      quote,
-      specialOffer,
-      code
+
+    // Check the existing number of banners
+    const existingBanners = await Banner.countDocuments();
+    if (existingBanners >= 5) {
+      return res.status(400).json({
+        success: false,
+        message: 'Maximum number of swiper reached (5)',
+      });
+    }
+
+    const SwiperData = new Banner({
+      
+      images,
+    
     });
-    await banner.save();
-    res.status(200).json({
+    await SwiperData.save();
+
+    res.status(201).json({
       success: true,
-      message: 'Banner details added successfully',
-      quote:quote,
-      specialOffer:specialOffer,
-      code:code
+      message: 'Swiper added successfully',
     });
   } catch (error) {
     next(error);

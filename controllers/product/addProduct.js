@@ -4,14 +4,15 @@ const uploadFiles = require("../../services/upload-files");
 
 const addProduct = async (req, res, next) => {
   try {
-    const { offer, subOffer, resturantName } = req.body;
+    const { offer, subOffer, resturantName,validTill } = req.body;
     const uniqueCode = Math.random().toString(36).substr(2, 8).toUpperCase();
 
     const result = await productValidation.validateAsync({
       offer,
       subOffer,
       resturantName,
-      uniqueCode,
+      uniqueCode, 
+      validTill
     });
     const product = new Product({ ...result, code: uniqueCode });
     await product.save();
@@ -20,6 +21,7 @@ const addProduct = async (req, res, next) => {
       status: 200,
       message: "Coupon created successfully",
       product,
+      validTill
     });
   } catch (error) {
     next(error);
