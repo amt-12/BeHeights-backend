@@ -31,7 +31,11 @@ const ProductSchema = new Schema(
       type: Date,
       required: true,
     },
+    role: {
+      type: String,
+      
   },
+},
   { timestamps: true }
 );
 

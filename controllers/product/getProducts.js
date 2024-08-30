@@ -7,14 +7,14 @@ const { ObjectId } = require("mongoose").Types;
 
 const getProducts = async (req, res, next) => {
   try {
-    const products = await Product.find({}).lean(); // Use lean() to get plain JavaScript objects
+    const products = await Product.find({}).sort({ createdAt: -1 }).lean(); // Sort by createdAt in descending order
 
     // Calculate days left for each product
     products.forEach((product) => {
       const today = new Date();
-      const validTillDate = new Date(product.validTill); // Note: I assume the field is named "validTill" not "validtill"
+      const validTillDate = new Date(product.validTill);
       const timeDiff = validTillDate.getTime() - today.getTime();
-      const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24)); // Convert milliseconds to days
+      const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
 
       if (daysLeft === 0) {
         product.daysLeft = `Today`;

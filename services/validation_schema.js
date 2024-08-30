@@ -5,6 +5,9 @@ const registerValidation = Joi.object({
   phone: Joi.number().required(),
   email: Joi.string().email().required(),
   password: Joi.string().required().min(3).max(50),
+  role: Joi.string(),
+  couponAvail: Joi.boolean()
+
 });
 const businessValidation = Joi.object({
   businessName: Joi.string(),
@@ -64,6 +67,8 @@ const productValidation = Joi.object({
   subOffer:Joi.string().required(),
   uniqueCode:Joi.string().required(),
   validTill:Joi.date().required(),
+  role:Joi.string(),
+  userEmail:Joi.string()
 });
 const exclusiveOfferValidation = Joi.object({
   resturantName:Joi.string(),
@@ -76,6 +81,7 @@ const exclusiveOfferValidation = Joi.object({
 });
 const CouponValidation = Joi.object({
   uniqueCode:Joi.string().required(),
+  userId:Joi.string().required(),
 });
 const orderValidation = Joi.object({
   productData: Joi.array().required(),

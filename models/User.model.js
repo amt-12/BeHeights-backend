@@ -16,6 +16,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
     phone: {
       type: String,
       required: true,
@@ -25,9 +29,13 @@ const UserSchema = new Schema(
       enum: ["user", "admin","business"],
       default: "user",
     },
-    isVerified: {
+    couponAvail: {
       type: Boolean,
       default: false,
+    },
+    availedCoupons: {
+      type: [String], // Define availedCoupons as an array of strings
+      default: [], // Initialize it with an empty array by default
     },
   },
   {

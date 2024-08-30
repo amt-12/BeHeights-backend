@@ -13,10 +13,12 @@ const getExclusiveOffers = require("../../controllers/product/getExclusiveOffers
 const updateExclusiveCoupon = require("../../controllers/product/updateExclusiveCoupon");
 const deleteExclusiveOffer = require("../../controllers/product/deleteExclusiveOffer");
 const availExclusiveOffer = require("../../controllers/product/availExclusiveOffer");
+const addBusinessProduct = require("../../controllers/product/addBusinessProduct");
 
 const router = require("express").Router();
 
 router.post("/addProduct", addProduct);
+router.post("/addBusinessProduct", addBusinessProduct);
 router.post("/addExclusiveCoupon", addExclusiveCoupon);
 router.post("/updateExclusiveCoupon/:id", updateExclusiveCoupon);
 router.delete("/deleteExclusiveCoupon/:id", deleteExclusiveOffer);
