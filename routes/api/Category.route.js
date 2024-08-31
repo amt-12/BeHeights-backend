@@ -12,10 +12,12 @@ const getSingleCategoryDetails = require("../../controllers/category/getSingleCa
 const getSubCategories = require("../../controllers/category/getSubCategories");
 
 router.post("/add", addCategory);
-router.get("/subCategory", getSubCategories);
+router.post("/categories/:categoryId/subcategories", getSubCategories);
 router.get("/getAllCategory", getAllCategory);
-router.put("/:id", updateCategory);
 router.delete("/:id", deleteCategory);
+
+
+router.put("/:id", updateCategory);
 router.get("/:id", getSingleCategory);
 router.get("/getSingleCategoryDetails/:id", getSingleCategoryDetails);
 router.post("/:categoryId", addSubCategory);

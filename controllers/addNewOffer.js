@@ -6,6 +6,9 @@ const addNewOffer = async (req, res, next) => {
     const businessId = req.params.id;
     const newOffer = req.body.offer;
     const newSubOffer = req.body.subOffer;
+    const newPrice = req.body.price;
+    const newValidFor = req.body.validFor;
+    const newValidTill = req.body.validTill;
 
     if (!businessId) {
       return res.status(400).json({
@@ -14,7 +17,7 @@ const addNewOffer = async (req, res, next) => {
       });
     }
 
-    if (!newOffer || !newSubOffer) {
+    if (!newOffer || !newSubOffer || !newPrice || !newValidFor || !newValidTill) {
       return res.status(400).json({
         success: false,
         message: "Please provide both new offer and sub offer",
@@ -31,7 +34,7 @@ const addNewOffer = async (req, res, next) => {
 
     await BusinessAll.findByIdAndUpdate(businessId, {
       $push: {
-        coupon: { offer: newOffer, subOffer: newSubOffer }
+        coupon: { offer: newOffer, subOffer: newSubOffer, price: newPrice ,validFor:newValidFor, validTill:newValidTill}
       }
     });
 
