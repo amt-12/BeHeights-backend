@@ -68,7 +68,9 @@ const productValidation = Joi.object({
   uniqueCode:Joi.string().required(),
   validTill:Joi.date().required(),
   role:Joi.string(),
-  userEmail:Joi.string()
+  userEmail:Joi.string(),
+  details: Joi.object() 
+
 });
 const exclusiveOfferValidation = Joi.object({
   resturantName:Joi.string(),

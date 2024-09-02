@@ -27,7 +27,9 @@ const getExclusiveOffers = async (req, res, next) => {
       const timeDiff = validTillDate.getTime() - today.getTime();
       const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24)); 
 
-      if (daysLeft === 0) {
+      if (daysLeft < 0) {
+        product.daysLeft = `Expired`;
+      } else if (daysLeft === 0) {
         product.daysLeft = `Today`;
       } else {
         product.daysLeft = daysLeft;

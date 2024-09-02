@@ -18,7 +18,6 @@ const router = require('express').Router();
 
 
 router.post('/add', addBusiness);
-// router.post('/getCoupon', getCoupon);
 router.get('/get', getAllBusiness);
 router.get('/get/:id', getSingleBusiness);
 router.get('/getByLocation', getAllBusinessLocation);
@@ -32,6 +31,8 @@ router.post('/addBusinessCoupon/:id', addBusinessCoupon)
 //this api is adding new field coupon and sub offers in it 
 router.patch('/addNewOffer/:id', addNewOffer);
 router.delete('/businesses/:id', deleteBusiness);
+
+
 
 
 

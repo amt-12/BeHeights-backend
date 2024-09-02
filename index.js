@@ -20,7 +20,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "http://192.168.1.3:5000", 
+    "http://192.168.1.84:5000", 
   ],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -87,7 +87,7 @@ mongoose
   )
   .then(() => {
     const PORT = process.env.PORT || 5001;
-    const HOST = "192.168.1.3";
+    const HOST = "192.168.1.84";
     http.listen(PORT, HOST, () => {
       console.log(
         `${chalk.green("✓")} ${chalk.blue(

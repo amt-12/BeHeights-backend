@@ -1,5 +1,6 @@
 const BusinessAll = require("../models/BuisnessAll.model");
 const { businessValidation } = require("../services/validation_schema");
+const { v4: uuidv4 } = require('uuid');
 
 const addNewOffer = async (req, res, next) => {
   try {
@@ -32,15 +33,25 @@ const addNewOffer = async (req, res, next) => {
       });
     }
 
+    const uniqueCode = uuidv4().slice(0, 8).toUpperCase(); // Generate a unique 8-character code
+
     await BusinessAll.findByIdAndUpdate(businessId, {
       $push: {
-        coupon: { offer: newOffer, subOffer: newSubOffer, price: newPrice ,validFor:newValidFor, validTill:newValidTill}
+        coupon: { 
+          code: uniqueCode,
+          offer: newOffer, 
+          subOffer: newSubOffer, 
+          price: newPrice,
+          validFor: newValidFor, 
+          validTill: newValidTill
+        }
       }
     });
 
     res.status(200).json({
       success: true,
       message: "New offer and sub offer added successfully",
+      code: uniqueCode
     });
   } catch (error) {
     next(error);
@@ -48,4 +59,3 @@ const addNewOffer = async (req, res, next) => {
 };
 
 module.exports = addNewOffer;
-
