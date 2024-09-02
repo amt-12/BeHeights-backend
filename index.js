@@ -87,7 +87,7 @@ mongoose
   )
   .then(() => {
     const PORT = process.env.PORT || 5001;
-    const HOST = "192.168.1.84";
+    const HOST = process.env.HOST;
     http.listen(PORT, HOST, () => {
       console.log(
         `${chalk.green("✓")} ${chalk.blue(
