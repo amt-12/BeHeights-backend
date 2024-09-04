@@ -20,7 +20,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "http://192.168.1.3:5000", 
+    "http://172.20.10.5:5000", 
   ],
   credentials: true,
   optionsSuccessStatus: 200,
