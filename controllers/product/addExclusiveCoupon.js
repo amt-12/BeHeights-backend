@@ -3,10 +3,10 @@ const { exclusiveOfferValidation } = require("../../services/validation_schema")
 
 const addExclusiveCoupon = async (req, res, next) => {
   try {
-    const { offer, subOffer, resturantName,location,validTill } = req.body;
+    const { offer, subOffer, businessName,location,validTill } = req.body;
 
     // Input validation for req.body properties
-    if (!offer || !subOffer || !resturantName || !location || !validTill ) {
+    if (!offer || !subOffer || !businessName || !location || !validTill ) {
       return res.status(400).json({
         success: false,
         message: "Missing required fields",
@@ -30,7 +30,7 @@ const addExclusiveCoupon = async (req, res, next) => {
       result = await exclusiveOfferValidation.validateAsync({
         offer,
         subOffer,
-        resturantName,
+        businessName,
         uniqueCode,
         location,
         validTill

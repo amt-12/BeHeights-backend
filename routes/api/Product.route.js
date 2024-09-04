@@ -15,6 +15,7 @@ const deleteExclusiveOffer = require("../../controllers/product/deleteExclusiveO
 const availExclusiveOffer = require("../../controllers/product/availExclusiveOffer");
 const addBusinessProduct = require("../../controllers/product/addBusinessProduct");
 const checkAvailCoupon = require("../../controllers/product/checkAvailCoupon");
+const updateValidDate = require("../../controllers/product/updateValidDate");
 
 const router = require("express").Router();
 
@@ -27,6 +28,7 @@ router.get('/exclusive-offers', getExclusiveOffers);
 router.put("/:id/status", statusChange);
 router.get("/stats/count", statusCount);
 router.put("/:id", updateProduct);
+router.put("/updateValid/:id", updateValidDate);
 router.delete("/:id", deleteProduct);
 router.get("/", getProducts);
 router.get("/:id", getSingleProducts);

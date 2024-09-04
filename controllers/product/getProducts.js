@@ -21,8 +21,15 @@ const getProducts = async (req, res, next) => {
       const timeDiff = validTillDate.getTime() - today.getTime();
       const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
 
-      if (daysLeft === 0) {
-        product.daysLeft = `Today`;
+      if (daysLeft < 0) {
+        product.daysLeft = `Expired`;
+        // Delete the coupon after 2 days if it's expired
+        setTimeout(async () => {
+          await Product.findByIdAndRemove(product._id);
+        }, 2 * 24 * 60 * 60 * 1000); // 2 days in milliseconds
+        throw createError(500, "Coupon has expired"); // Throw error with status 500
+      } else if (daysLeft === 0) {
+        product.daysLeft = `Last day`;
       } else {
         product.daysLeft = daysLeft;
       }
@@ -30,15 +37,14 @@ const getProducts = async (req, res, next) => {
       // Check if user has availed the coupon
       if (user && user.availedCoupons.includes(product.uniqueCode)) {
         product.message = "Coupon already availed";
-      } else if (daysLeft <= 0) {
-        product.message = "Coupon has expired";
       }
     });
 
     res.json({ success: true, status: 200, products });
   } catch (error) {
-    res.json({ success: false, status: 500, error: error.message });
+    res.json({ success: false, status: error.status || 500, error: error.message });
   }
 };
 
 module.exports = getProducts;
+

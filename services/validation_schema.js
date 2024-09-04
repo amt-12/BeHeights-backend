@@ -11,14 +11,14 @@ const registerValidation = Joi.object({
 });
 const businessValidation = Joi.object({
   businessName: Joi.string(),
-  typeOfBusiness: Joi.string(),
+  businessType: Joi.string(),
   location: Joi.string(),
-  typeOfFood: Joi.array().items(Joi.string()),
-  cost: Joi.array().items(Joi.string()),
+  typeFood: Joi.array().items(Joi.string()),
+  costPerPerson: Joi.array().items(Joi.string()),
   tableTime: Joi.array().items(Joi.string()),
   buffetPrice: Joi.number(),
   isActive:Joi.boolean(),
-  images: Joi.string(),
+  image: Joi.string(),
   businessOff: Joi.number(),
   offerTitle: Joi.string(),
   offerPrice: Joi.number(),
@@ -26,6 +26,9 @@ const businessValidation = Joi.object({
   validTill: Joi.date(),
   coupon:Joi.array().items(Joi.string()),
   validFor: Joi.string(),
+  isAvailed: Joi.boolean(),
+  uniqueCode:Joi.string(),
+
 });
 const businessCouponValidation = Joi.object({
   offerName: Joi.string(),
@@ -73,7 +76,7 @@ const productValidation = Joi.object({
 
 });
 const exclusiveOfferValidation = Joi.object({
-  resturantName:Joi.string(),
+  tName:Joi.string(),
   location:Joi.string(),
   offer:Joi.string(),
   subOffer:Joi.string(),

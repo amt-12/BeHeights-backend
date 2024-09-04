@@ -7,7 +7,7 @@ const ExclusiveOffer = new Schema(
       type: String,
       required: true,
     },
-    resturantName: {
+    businessName: {
       type: String,
       required: true,
     },

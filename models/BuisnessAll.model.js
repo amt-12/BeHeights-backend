@@ -1,31 +1,32 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const businessAllSchema = new mongoose.Schema({
   businessName: {
     type: String,
     required: true,
-    trim: true
+
   },
-  typeOfBusiness: {
+  businessType: {
     type: String,
-    required: true,
-    trim: true
+
   },
+
+  
   location: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
-  typeOfFood: {
+  typeFood: {
     type: [String],
   },
-  cost: {
+  costPerPerson: {
     type: [Number],
-    required: true
+    required: true,
   },
   tableTime: {
     type: [String],
-    required: true
+    required: true,
   },
   location: {
     type: String,
@@ -35,11 +36,14 @@ const businessAllSchema = new mongoose.Schema({
   },
   isActive: {
     type: Boolean,
-    default: false
+    default: false,
   },
-  images: {
+  isAvailed: {
     type: String,
-    required: true
+    default: false,
+  },
+  image: {
+    type: String,
   },
   businessOff: {
     type: Number,
@@ -62,20 +66,24 @@ const businessAllSchema = new mongoose.Schema({
   coupon: {
     type: [String],
   },
-  offer:{
-    type:String,
+  offer: {
+    type: String,
   },
-  subOffer:{
-    type:String,
+  subOffer: {
+    type: String,
   },
   coupon: {
     type: {
       offer: String,
-      subOffer: String
-    }
-  }
+      subOffer: String,
+    },
+  },
+
+  uniqueCode: {
+    type: String,
+  },
 });
 
-const BusinessAll = mongoose.model('BusinessAll', businessAllSchema);
+const BusinessAll = mongoose.model("BusinessAll", businessAllSchema);
 
 module.exports = BusinessAll;

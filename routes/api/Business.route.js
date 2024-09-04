@@ -34,6 +34,4 @@ router.delete('/businesses/:id', deleteBusiness);
 
 
 
-
-
 module.exports = router;

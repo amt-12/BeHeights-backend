@@ -6,14 +6,15 @@ const addProduct = async (req, res, next) => {
   try {
     const { offer, subOffer, resturantName, validTill, addDetails } = req.body;
     const uniqueCode = Math.random().toString(36).substr(2, 8).toUpperCase();
+    console.log(req.body)
 
     const result = await productValidation.validateAsync({
       offer,
       subOffer,
       resturantName,
       uniqueCode,
-      validTill, // remove toISOString() method call
-      details: addDetails // extract addDetails object
+      validTill, 
+      details: addDetails
     });
 
     const product = new Product({ ...result, code: uniqueCode, details: addDetails });
