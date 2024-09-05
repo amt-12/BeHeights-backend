@@ -16,6 +16,7 @@ const addBusiness = require("./Business.route");
 
 
 
+
 router.use("/auth", authRoutes);
 router.use("/user", userRoutes);
 router.use("/category", categoryRoutes);
