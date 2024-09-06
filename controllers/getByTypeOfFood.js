@@ -9,8 +9,8 @@ const getByTypeOfBusiness = async (req, res, next) => {
 
     let matchStage = {};
 
-    if (query.typeOfFood) {
-      matchStage.typeOfFood = query.typeOfFood;
+    if (query.typeFood) {
+      matchStage.typeFood = query.typeFood;
     } else {
       matchStage = {}; // explicitly set matchStage to an empty object
     }

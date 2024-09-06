@@ -9,13 +9,12 @@ const addBusiness = async (req, res, next) => {
   try {
     const business = await businessValidation.validateAsync(req.body);
     const uniqueCode = Math.random().toString(36).substr(2, 8).toUpperCase();
-console.log(req.body)
     const {
       businessName,
       businessType,
       location,
-      typeOfFood,
-      cost,
+      typeFood,
+      costPerPerson,
       tableTime,
       buffetPrice,
       isActive,
@@ -27,6 +26,7 @@ console.log(req.body)
       validTill,
       validFor,
     } = business;
+    console.log(business)
 
     const existingBusiness = await BusinessAll.findOne({ businessName });
     if (existingBusiness) {
@@ -40,8 +40,8 @@ console.log(req.body)
       businessName,
       businessType,
       location,
-      typeOfFood,
-      cost,
+      typeFood,
+      costPerPerson,
       tableTime,
       buffetPrice,
       isActive,

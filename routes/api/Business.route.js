@@ -11,6 +11,7 @@ const updateBusinessCoupon = require('../../controllers/updateBusinessCoupon');
 const uploadImage = require('../../controllers/uploadImage');
 const addNewOffer = require('../../controllers/addNewOffer');
 const getByTypeOfFood = require('../../controllers/getByTypeOfFood');
+const getByBusiness = require('../../controllers/getByBusiness');
 
 const router = require('express').Router();
 
@@ -24,6 +25,7 @@ router.get('/getByLocation', getAllBusinessLocation);
 router.get('/getByTypeOfBusiness', getByTypeOfBusiness);
 //search by food
 router.get('/getByTypeOfFood', getByTypeOfFood);
+router.get('/getByBusiness', getByBusiness);
 router.get('/getByTableTime', getByTableTime);
 router.post('/images', uploadImage)
 router.post('/businesses/:id', updateBusiness);

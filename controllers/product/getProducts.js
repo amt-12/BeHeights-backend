@@ -1,33 +1,28 @@
-const createError = require("http-errors");
 const Product = require("../../models/Product.model");
-const User = require("../../models/User.model"); // Import User model
-const { productValidation } = require("../../services/validation_schema");
-const uploadFiles = require("../../services/upload-files");
-const formidable = require("formidable");
-const { ObjectId } = require("mongoose").Types;
 
 const getProducts = async (req, res, next) => {
   try {
-    // Fetch the user data
-    const user = req.user; // Assuming you have middleware to fetch user data
+    const user = req.user;
 
-    // Fetch products
     const products = await Product.find({}).sort({ createdAt: -1 }).lean();
 
-    // Calculate days left for each product
-    products.forEach((product) => {
+    products.forEach(async (product) => {
       const today = new Date();
       const validTillDate = new Date(product.validTill);
       const timeDiff = validTillDate.getTime() - today.getTime();
       const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
-
+      console.log(daysLeft);
       if (daysLeft < 0) {
-        if (daysLeft === -1) {
-            product.daysLeft = `Expired (1 day ago)`;
-        } else {
-            product.daysLeft = `Expired`;
-        }
-    }
+        product.daysLeft = `Expired`;
+        // Delete the expired coupon from the database
+        await Product.findByIdAndRemove(product._id);
+      } else if (daysLeft === 0) {
+        product.daysLeft = `Expires today`;
+      } else if (daysLeft === 1) {
+        product.daysLeft = `Expires in 1 day`;
+      } else {
+        product.daysLeft = `${daysLeft}`;
+      }
 
       // Check if user has availed the coupon
       if (user && user.availedCoupons.includes(product.uniqueCode)) {
@@ -44,3 +39,5 @@ const getProducts = async (req, res, next) => {
 };
 
 module.exports = getProducts;
+
+
