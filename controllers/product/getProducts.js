@@ -22,12 +22,12 @@ const getProducts = async (req, res, next) => {
       const daysLeft = Math.floor(timeDiff / (1000 * 3600 * 24));
 
       if (daysLeft < 0) {
-        product.daysLeft = `Expired`;
-      } else if (daysLeft === 0) {
-        product.daysLeft = `Last day`;
-      } else {
-        product.daysLeft = daysLeft;
-      }
+        if (daysLeft === -1) {
+            product.daysLeft = `Expired (1 day ago)`;
+        } else {
+            product.daysLeft = `Expired`;
+        }
+    }
 
       // Check if user has availed the coupon
       if (user && user.availedCoupons.includes(product.uniqueCode)) {

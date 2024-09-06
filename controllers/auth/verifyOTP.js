@@ -10,9 +10,8 @@ const verifyOtp = async (req, res, next) => {
       otp,
     });
     
-    console.log(resetotp?.otp);
-    if (resetotp?.otp === otp) {
-      // Update User model with isVerified set to true
+    console.log(req.body.otp);
+    if (resetotp?.otp === req.body.otp) {
       const user = await User.findOneAndUpdate({ email }, { isVerified: true }, { new: true });
       if (!user) {
         return res.status(404).json({ message: "User not found" });

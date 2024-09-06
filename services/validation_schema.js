@@ -76,7 +76,7 @@ const productValidation = Joi.object({
 
 });
 const exclusiveOfferValidation = Joi.object({
-  tName:Joi.string(),
+  businessName:Joi.string(),
   location:Joi.string(),
   offer:Joi.string(),
   subOffer:Joi.string(),
