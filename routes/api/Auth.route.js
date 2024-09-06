@@ -12,6 +12,7 @@ const updatePassword = require("../../controllers/user/updatePassword");
 
 
 router.post("/register", register);
+
 router.post("/registerOtp", registerOtp);
 router.post("/update", updateProfile);
 router.post("/updatePassword", updatePassword);
