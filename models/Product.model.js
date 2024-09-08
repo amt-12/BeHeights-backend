@@ -35,10 +35,6 @@ const ProductSchema = new Schema(
       type: String,
       
   },
-    details: {
-      type: [Object],
-      required: true,
-},
   },
   { timestamps: true }
 );

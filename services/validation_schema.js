@@ -72,8 +72,6 @@ const productValidation = Joi.object({
   validTill:Joi.date().required(),
   role:Joi.string(),
   userEmail:Joi.string(),
-  details: Joi.object() 
-
 });
 const exclusiveOfferValidation = Joi.object({
   businessName:Joi.string(),

@@ -14,10 +14,9 @@ const addProduct = async (req, res, next) => {
       resturantName,
       uniqueCode,
       validTill, 
-      details: addDetails
     });
 
-    const product = new Product({ ...result, code: uniqueCode, details: addDetails });
+    const product = new Product({ ...result, code: uniqueCode });
     await product.save();
 
     res.json({
