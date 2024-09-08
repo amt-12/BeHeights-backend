@@ -45,6 +45,7 @@ app.post("/payment-sheet", async (req, res) => {
     if (!customer) {
       return res.status(400).json({ error: "No customer found" });
     }
+    
 
     // Create ephemeral key for the customer
     const ephemeralKey = await stripe.ephemeralKeys.create(
