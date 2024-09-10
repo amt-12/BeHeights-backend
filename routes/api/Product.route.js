@@ -16,10 +16,12 @@ const availExclusiveOffer = require("../../controllers/product/availExclusiveOff
 const addBusinessProduct = require("../../controllers/product/addBusinessProduct");
 const checkAvailCoupon = require("../../controllers/product/checkAvailCoupon");
 const updateValidDate = require("../../controllers/product/updateValidDate");
+const addBannerProduct = require("../../controllers/product/addBannerProduct");
 
 const router = require("express").Router();
 
 router.post("/addProduct", addProduct);
+router.post("/addBannerProduct", addBannerProduct);
 router.post("/addBusinessProduct", addBusinessProduct);
 router.post("/addExclusiveCoupon", addExclusiveCoupon);
 router.post("/updateExclusiveCoupon/:id", updateExclusiveCoupon);

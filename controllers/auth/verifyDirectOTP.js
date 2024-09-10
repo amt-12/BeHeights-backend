@@ -13,15 +13,19 @@ const verifyDirectOTP = async (req, res, next) => {
     
     console.log(resetotp?.otp);
     if (resetotp?.otp === otp) {
-      // Update User model with isVerified set to true
-      const userDirect = await UserOtpModel.findOneAndUpdate({ email }, { isVerified: true }, { new: true });
-      if (!userDirect) {
+      // Update User model with isVerified set to true and role set to "user"
+      const user = await Otp.findOneAndUpdate({ email }, { isVerified: true, role: "user" }, { new: true });
+      if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
       res.status(200).json({
         message: "OTP Verified Successfully, please Login !",
         success: true,
         statusText: "OK",
+        user:{
+          email: user.email,
+          role: user.role,
+        }
       });
     } else if (resetotp?.otp !== otp) {
       res.status(500).json({

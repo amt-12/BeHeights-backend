@@ -7,10 +7,6 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-    resturantName: {
-      type: String,
-      required: true,
-    },
     subOffer: {
       type: String,
       required: true,

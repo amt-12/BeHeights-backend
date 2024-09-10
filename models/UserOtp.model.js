@@ -13,6 +13,11 @@ const UserModelSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    role: {
+      type: String,
+      enum: ["user", "admin","business"],
+      default: "user",
+    },
   },
   {
     timestamps: true,

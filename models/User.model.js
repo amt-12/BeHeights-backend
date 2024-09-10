@@ -33,6 +33,9 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    token:{
+      type: String,
+    },
     availedCoupons: {
       type: [String], // Define availedCoupons as an array of strings
       default: [], // Initialize it with an empty array by default

@@ -12,18 +12,6 @@ const registerOtp = async (req, res, next) => {
     const result = await OtpValidation.validateAsync(req.body);
     const { email } = result;
 
-    const userExistingEmail = await UserOtpModel.findOne({
-      email,
-    });
-
-    if (userExistingEmail) {
-      throw new Error(`${email} is already exist. Please login.`);
-    }
-    const userOtp = new UserOtpModel({
-      email,
-   
-    });
-    await userOtp.save();
     res.status(200).json({
       message: "OTP Sent successfully",
       success: true,

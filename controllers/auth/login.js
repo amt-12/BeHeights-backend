@@ -1,12 +1,11 @@
 const bcrypt = require("bcryptjs");
 const createError = require("http-errors");
 
-const Token = require("../../models/RefreshToken.model");
+const User = require("../../models/User.model");
 const {
   generateAccessToken,
   generateRefreshToken,
 } = require("../../services/generate_token");
-const User = require("../../models/User.model");
 const { loginValidation } = require("../../services/validation_schema");
 const { accessTokenLife, refreshTokenLife } = require("../../config/keys").jwt;
 
@@ -16,7 +15,8 @@ const loginUser = async (req, res, next) => {
     const { email, password } = result;
 
     const userLogin = await User.findOne({ email, isVerified: true });
-    if (!userLogin) throw createError.BadRequest("Email is not registered or not verified");
+    if (!userLogin)
+      throw createError.BadRequest("Email is not registered or not verified");
     const isMatch = await bcrypt.compare(password, userLogin.password);
     if (!isMatch) {
       throw createError.BadRequest("Incorrect password. Please try again.");
@@ -26,19 +26,16 @@ const loginUser = async (req, res, next) => {
       _id: userLogin._id,
       phone: userLogin.phone,
       email: userLogin.email,
-      role: userLogin.role, 
+      role: userLogin.role,
     };
 
     const accessToken = generateAccessToken(payload, accessTokenLife);
-    const refreshToken = generateRefreshToken(payload, refreshTokenLife);
-    if (accessToken && refreshToken) {
-      const token = new Token({
-        user: userLogin._id,
-        token: refreshToken,
-      });
-      await token.save();
+    const token = generateRefreshToken(payload, refreshTokenLife);
+    if (accessToken && token) {
+      userLogin.token = token; // add token to userLogin
+      await userLogin.save(); // save the userLogin document
 
-      res.cookie("auth", refreshToken, { httpOnly: true });
+      res.cookie("auth", token, { httpOnly: true });
 
       res.status(200).json({
         success: true,

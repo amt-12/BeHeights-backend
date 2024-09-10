@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
+const app = express(); //The Application object handles important tasks such as handling HTTP requests, rendering HTML views, and configuring middleware etc.
+
+
 const http = require("http").Server(app);
 const mongoose = require("mongoose");
 const chalk = require("chalk");
@@ -20,7 +22,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "http://172.20.10.5:5000", 
+    "http://192.168.1.2:5000", 
   ],
   credentials: true,
   optionsSuccessStatus: 200,
@@ -30,7 +32,8 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan("combined"));
 
-app.use(routes);
+app.use(routes); // use routes
+
 const secret_key = process.env.STRIPE_SECRET_KEY;
 const stripe = require("stripe")(secret_key);
 

@@ -9,6 +9,7 @@ const registerValidation = Joi.object({
   couponAvail: Joi.boolean()
 
 });
+
 const businessValidation = Joi.object({
   businessName: Joi.string(),
   businessType: Joi.string(),
@@ -65,7 +66,15 @@ const categoryValidation = Joi.object({
   parent: Joi.string(),
 });
 const productValidation = Joi.object({
-  resturantName:Joi.string().required(),
+  offer:Joi.string().required(),
+  subOffer:Joi.string().required(),
+  uniqueCode:Joi.string().required(),
+  validTill:Joi.date().required(),
+  role:Joi.string(),
+  userEmail:Joi.string(),
+});
+const productBannerValidation = Joi.object({
+  title:Joi.string().required(),
   offer:Joi.string().required(),
   subOffer:Joi.string().required(),
   uniqueCode:Joi.string().required(),
@@ -257,5 +266,6 @@ module.exports = {
   updateValidation,
   businessValidation,
   businessCouponValidation,
-  exclusiveOfferValidation
+  exclusiveOfferValidation,
+  productBannerValidation
 };
