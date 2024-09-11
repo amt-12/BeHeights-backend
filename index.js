@@ -22,7 +22,8 @@ const verifyToken = (req, res, next) => {
   if (!token) {
     return res.status(401).json({ error: "No token provided" });
   }
-
+  const secretKey = cryptoRandomString({ length: 64 });
+  console.log(secretKey);
   jwt.verify(token, secretKey, (err, decoded) => {
     if (err) {
       return res.status(401).json({ error: "Invalid token" });
