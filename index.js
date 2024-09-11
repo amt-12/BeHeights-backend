@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const app = express(); //The Application object handles important tasks such as handling HTTP requests, rendering HTML views, and configuring middleware etc.
+const jwt = require("jsonwebtoken");
+const router = require("express").Router();
 
 
 const http = require("http").Server(app);
@@ -14,7 +16,23 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 const routes = require("./routes");
+// Middleware function to verify JWT token
+const verifyToken = (req, res, next) => {
+  const token = req.headers["x-access-token"] || req.headers["authorization"];
+  if (!token) {
+    return res.status(401).json({ error: "No token provided" });
+  }
 
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: "Invalid token" });
+    }
+    req.user = decoded;
+    next();
+  });
+};
+// Apply verifyToken middleware to all routes
+router.use(verifyToken);
 
 const database = process.env.DB_CONNECT;
 
