@@ -16,24 +16,7 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 const routes = require("./routes");
-// Middleware function to verify JWT token
-const verifyToken = (req, res, next) => {
-  const token = req.headers["x-access-token"] || req.headers["authorization"];
-  if (!token) {
-    return res.status(401).json({ error: "No token provided" });
-  }
-  const secretKey = cryptoRandomString({ length: 64 });
-  console.log(secretKey);
-  jwt.verify(token, secretKey, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ error: "Invalid token" });
-    }
-    req.user = decoded;
-    next();
-  });
-};
-// Apply verifyToken middleware to all routes
-router.use(verifyToken);
+
 
 const database = process.env.DB_CONNECT;
 
@@ -42,7 +25,6 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "http://192.168.1.2:5000", 
   ],
   credentials: true,
   optionsSuccessStatus: 200,

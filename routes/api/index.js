@@ -12,6 +12,7 @@ const ResponseRoutes = require("./Response.route");
 const getbill = require("./GetOtp.route");
 const getbanner = require("./Banner.route");
 const addBusiness = require("./Business.route");
+const checkAuth = require("../../middlewares/check-auth");
 
 
 
@@ -19,17 +20,11 @@ const addBusiness = require("./Business.route");
 
 router.use("/auth", authRoutes);
 // router.use("/user", userRoutes);
-router.use("/category", categoryRoutes);
-router.use("/contact", contactUs);
-router.use("/cart", cartRoutes);
-router.use("/wishlist", wishListRoutes);
-router.use("/product", productRoutes);
-router.use("/addProductName", addProductNameRoutes);
-router.use("/feedback", feebackRoutes);
-router.use("/response", ResponseRoutes);
-router.use('/verify', getbill);
-router.use('/banner', getbanner);
-router.use('/addBusiness', addBusiness);
+router.use("/category",checkAuth, categoryRoutes);
+router.use("/product",checkAuth, productRoutes);
+router.use('/verify',checkAuth, getbill);
+router.use('/banner',checkAuth, getbanner);
+router.use('/addBusiness',checkAuth, addBusiness);
 
 
 
