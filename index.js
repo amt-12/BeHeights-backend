@@ -25,6 +25,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 const corsOptions = {
   origin: [
     "http://localhost:5173",
+    "https://api.beheights.com"
   ],
   credentials: true,
   optionsSuccessStatus: 200,
