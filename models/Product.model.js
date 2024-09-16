@@ -29,8 +29,16 @@ const ProductSchema = new Schema(
     },
     role: {
       type: String,
-      
   },
+  limit:{
+    type:String,
+    // required:true
+  },
+  restaurantName:{
+    type:String
+  },
+  redeemedCount: { type: Number, default: 0 }, 
+
   },
   { timestamps: true }
 );

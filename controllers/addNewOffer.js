@@ -1,4 +1,5 @@
 const BusinessAll = require("../models/BuisnessAll.model");
+const TopBusiness = require("../models/TopBusiness.model");
 const { businessValidation } = require("../services/validation_schema");
 const { v4: uuidv4 } = require('uuid');
 
@@ -48,6 +49,19 @@ const addNewOffer = async (req, res, next) => {
       }
     });
 
+      await TopBusiness.findByIdAndUpdate(businessId,{
+        $push: {
+          coupon: { 
+            code: uniqueCode,
+            offer: newOffer, 
+            subOffer: newSubOffer, 
+            price: newPrice,
+            validFor: newValidFor, 
+            validTill: newValidTill
+          }
+        }
+      });
+    
     res.status(200).json({
       success: true,
       message: "New offer and sub offer added successfully",

@@ -10,17 +10,23 @@ const getSubCategory = require("../../controllers/category/getSubCategory");
 const deleteSubCategory = require("../../controllers/category/deleteSubCategory");
 const getSingleCategoryDetails = require("../../controllers/category/getSingleCategoryDetails");
 const getSubCategories = require("../../controllers/category/getSubCategories");
+const favCategory = require("../../controllers/category/FavCategory");
+const deleteSingleCategory = require("../../controllers/category/deleteSingleCategory");
 
 router.post("/add", addCategory);
 router.post("/categories/:categoryId/subcategories", getSubCategories);
+router.delete("/categories/:categoryId", deleteSingleCategory);
+
+router.post("/FavCategory", favCategory);
 router.get("/getAllCategory", getAllCategory);
 router.delete("/:id", deleteCategory);
-
-
 router.put("/:id", updateCategory);
 router.get("/:id", getSingleCategory);
 router.get("/getSingleCategoryDetails/:id", getSingleCategoryDetails);
 router.post("/:categoryId", addSubCategory);
+
+
+
 router.delete("/subCategory/:id", deleteSubCategory);
 
 module.exports = router;

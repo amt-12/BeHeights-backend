@@ -1,52 +1,52 @@
+const { debounce } = require("lodash");
 const BusinessAll = require("../models/BuisnessAll.model");
 
-const getAllBusiness = async (req, res, next) => {
+const getByBusiness = debounce(async (req, res, next) => {
   try {
-    const searchQuery = req.query.search;
-    if (!searchQuery) {
-      return res.status(400).json({
-        success: false,
-        status: 400,
-        message: "Please provide a search query",
-      });
-    }
+    const { query } = req;
+    console.log(query);
+    const startIndex = (query.startIndex && parseInt(query.startIndex)) || 0;
+    const viewSize = (query.viewSize && parseInt(query.viewSize)) || 10;
+    const businessName = query.businessName;
 
-    const restaurants = await BusinessAll.aggregate([
-      {
+    let pipeline = [];
+
+    // Only add the match stage if businessName is provided
+    if (businessName) {
+      const matchStage = {
         $match: {
-          businessName: { $regex: `^${searchQuery}`, $options: "i" },
-        },
-      },
-      {
-        $facet: {
-          data: [],
-          count: [
-            {
-              $count: "total",
-            },
-          ],
-        },
-      },
-    ]);
-
-    if (restaurants[0].count[0].total === 0) {
-      return res.status(404).json({
-        success: false,
-        status: 404,
-        message: "No business found matching the search query",
-      });
+          businessName: { $regex: businessName, $options: 'i' }
+        }
+      };
+      pipeline.push(matchStage);
     }
+
+    pipeline.push({
+      $facet: {
+        data: [
+          { $skip: startIndex },
+          { $limit: parseInt(viewSize) }
+        ],
+        count: [
+          {
+            $count: "total"
+          }
+        ]
+      }
+    });
+
+    const restaurants = await BusinessAll.aggregate(pipeline);
 
     res.json({
       success: true,
       status: 200,
-      message: "Businesses fetched successfully",
-      count: restaurants[0].count[0].total,
-      restaurants: restaurants[0].data,
+      message: "Restaurants fetched successfully",
+      count: restaurants?.[0]?.count?.[0]?.total,
+      restaurants: restaurants?.[0]?.data
     });
   } catch (error) {
     next(error);
   }
-};
+}, 500); // debounce for 500ms
 
-module.exports = getAllBusiness;
+module.exports = getByBusiness;

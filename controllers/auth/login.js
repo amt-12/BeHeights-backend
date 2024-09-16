@@ -38,6 +38,7 @@ const loginUser = async (req, res, next) => {
       res.cookie("auth", token, { httpOnly: true });
 
       res.status(200).json({
+        message: "Login successful !!",
         success: true,
         accessToken,
         user: payload,

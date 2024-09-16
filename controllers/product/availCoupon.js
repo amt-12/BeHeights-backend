@@ -16,13 +16,18 @@ const availCoupon = async (req, res, next) => {
         await user.save();
       }
     }
-    
+
     updateAvailedCoupons();
 
     const userCoupon = await Product.findOne({ uniqueCode });
 
-    if (userCoupon && userCoupon.isAvail) {
-      throw new Error(`${uniqueCode} Already Redeemed!`);
+    if (userCoupon) {
+      if (userCoupon.isAvail) {
+        throw new Error(`${uniqueCode} Already Redeemed!`);
+      }
+      if (userCoupon.redeemedCount >= userCoupon.limit) {
+        throw new Error(`Coupon ${uniqueCode} has exceeded its redemption limit!`);
+      }
     }
 
     // Find the user by email
@@ -44,6 +49,13 @@ const availCoupon = async (req, res, next) => {
       { new: true }
     );
 
+    // Update the coupon's redeemed count
+    const couponUpdate = await Product.findOneAndUpdate(
+      { uniqueCode },
+      { $inc: { redeemedCount: 1 } },
+      { new: true }
+    );
+
     // Return the availed coupon information
     res.status(200).json({
       message: "Coupon Redeemed",
@@ -51,7 +63,7 @@ const availCoupon = async (req, res, next) => {
       statusText: "OK",
       coupon: {
         uniqueCode,
-        // Add other coupon details you want to return, e.g., coupon name, description, etc.
+        redeemedCount: couponUpdate.redeemedCount,
       },
     });
   } catch (error) {

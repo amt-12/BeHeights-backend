@@ -12,6 +12,11 @@ const uploadImage = require('../../controllers/uploadImage');
 const addNewOffer = require('../../controllers/addNewOffer');
 const getByTypeOfFood = require('../../controllers/getByTypeOfFood');
 const getByBusiness = require('../../controllers/getByBusiness');
+const addLocation = require('../../controllers/addLocation');
+const addTopBusiness = require('../../controllers/addTopBusiness');
+const getAllTopBusinesses = require('../../controllers/getAllTopBusiness');
+const deleteTopBusiness = require('../../controllers/deleteTopBusiness');
+const getDropDown = require('../../controllers/getDropDown');
 
 const router = require('express').Router();
 
@@ -19,8 +24,13 @@ const router = require('express').Router();
 
 
 router.post('/add', addBusiness);
+router.post('/addTopBusiness', addTopBusiness);
+router.get('/getAllTopBusiness', getAllTopBusinesses);
+router.delete('/deleteTopBusiness/:id', deleteTopBusiness);
 router.get('/get', getAllBusiness);
+router.get('/getDropDown', getDropDown);
 router.get('/get/:id', getSingleBusiness);
+router.get('/addLocation', addLocation);
 router.get('/getByLocation', getAllBusinessLocation);
 router.get('/getByTypeOfBusiness', getByTypeOfBusiness);
 //search by food

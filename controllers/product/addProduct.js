@@ -4,16 +4,17 @@ const uploadFiles = require("../../services/upload-files");
 
 const addProduct = async (req, res, next) => {
   try {
-    const { offer, subOffer, resturantName, validTill, addDetails } = req.body;
+    const { offer, subOffer, restaurantName, validTill, limit } = req.body;
     const uniqueCode = Math.random().toString(36).substr(2, 8).toUpperCase();
     console.log(req.body)
 
     const result = await productValidation.validateAsync({
       offer,
       subOffer,
-      resturantName,
+      restaurantName,
       uniqueCode,
       validTill, 
+      limit
     });
 
     const product = new Product({ ...result, code: uniqueCode });

@@ -1,5 +1,5 @@
 const Product = require("../../models/Product.model");
-const { productValidation } = require("../../services/validation_schema");
+const { productValidation, businessProductValidation } = require("../../services/validation_schema");
 const uploadFiles = require("../../services/upload-files");
 
 const addBusinessProduct = async (req, res, next) => {
@@ -16,7 +16,7 @@ const addBusinessProduct = async (req, res, next) => {
 
     const uniqueCode = Math.random().toString(36).substr(2, 8).toUpperCase();
 
-    const result = await productValidation.validateAsync({
+    const result = await businessProductValidation.validateAsync({
       offer,
       subOffer,
       uniqueCode, 

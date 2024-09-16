@@ -13,24 +13,25 @@ const register = async (req, res, next) => {
 
     const userExistingEmail = await User.findOne({
       email,
-      
     });
     const userExistingPhone = await User.findOne({
       phone,
-      
     });
     if (userExistingPhone) {
       throw new Error(`${phone} is already exist. Please login.`);
     }
 
     if (userExistingEmail) {
-      throw new Error(`${email} is already exist. Please login.`);
+      if (userExistingEmail.isVerified === true) {
+        throw new Error(`${email} is already exist and verified. Please login.`);
+      } else {
+        throw new Error(`${email} is already exist but not verified. Please verify your email.`);
+      }
     }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-  
     const user = new User({
       name,
       phone,
@@ -40,7 +41,7 @@ const register = async (req, res, next) => {
     await user.save();
 
     res.status(200).json({
-      message: " Otp Sent successfully",
+      message: "Otp Sent successfully",
       success: true,
     });
   } catch (error) {

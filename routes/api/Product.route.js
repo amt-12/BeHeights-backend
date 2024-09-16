@@ -17,13 +17,14 @@ const addBusinessProduct = require("../../controllers/product/addBusinessProduct
 const checkAvailCoupon = require("../../controllers/product/checkAvailCoupon");
 const updateValidDate = require("../../controllers/product/updateValidDate");
 const addBannerProduct = require("../../controllers/product/addBannerProduct");
-const checkAuth = require("../../middlewares/check-auth")
+const addLoversCategory = require("../../controllers/product/addLoversCategory");
 const router = require("express").Router();
 
 router.post("/addProduct", addProduct);
 router.post("/addBannerProduct", addBannerProduct);
 router.post("/addBusinessProduct", addBusinessProduct);
 router.post("/addExclusiveCoupon", addExclusiveCoupon);
+router.post("/addLoversCategory", addLoversCategory);// currently working
 router.post("/updateExclusiveCoupon/:id", updateExclusiveCoupon);
 router.delete("/deleteExclusiveCoupon/:id", deleteExclusiveOffer);
 router.get('/exclusive-offers', getExclusiveOffers);

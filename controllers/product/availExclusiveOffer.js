@@ -8,11 +8,11 @@ const availExclusiveOffer = async (req, res, next) => {
     console.log(couponExclusiveCode);
     const { uniqueCode } = couponExclusiveCode;
 
-    const userCoupon = await ExclusiveOfferModel.findOne({ uniqueCode });
+    // const userCoupon = await ExclusiveOfferModel.findOne({ uniqueCode });
 
-    if (userCoupon && userCoupon.isAvail) {
-      throw new Error(`${uniqueCode} Already Redeemed by you!`);
-    }
+    // if (userCoupon && userCoupon.isAvail) {
+    //   throw new Error(`${uniqueCode} Already Redeemed by you!`);
+    // }
 
     const couponUpdate = await ExclusiveOfferModel.findOneAndUpdate(
       { uniqueCode }, // update only if userId is null
