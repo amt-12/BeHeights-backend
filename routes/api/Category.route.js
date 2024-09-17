@@ -17,7 +17,6 @@ router.post("/add", addCategory);
 router.post("/categories/:categoryId/subcategories", getSubCategories);
 router.delete("/categories/:categoryId", deleteSingleCategory);
 
-router.post("/FavCategory", favCategory);
 router.get("/getAllCategory", getAllCategory);
 router.delete("/:id", deleteCategory);
 router.put("/:id", updateCategory);
