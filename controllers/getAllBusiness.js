@@ -5,6 +5,7 @@ const getAllBusinesses = async (req, res, next) => {
   try {
     const { name, keyword, status } = req.query;
     const { query } = req;
+    console.log(req.query)
     const startIndex = (query.startIndex && parseInt(query.startIndex)) || 0;
     const viewSize = (query.viewSize && parseInt(query.viewSize)) || 10;
     let searchCriteria = {};
@@ -21,7 +22,7 @@ const getAllBusinesses = async (req, res, next) => {
     }
 
     if (status) {
-      if (status === false) {
+      if (status === "false") {
         searchCriteria = {
           ...searchCriteria,
           isActive: false,

@@ -2,7 +2,7 @@ const Otp = require("../../models/Otp.model");
 const User = require("../../models/User.model"); // Import User model
 const UserOtpModel = require("../../models/UserOtp.model");
 const jwt = require("jsonwebtoken"); // Add this line to import jwt
-const { accessTokenLife, refreshTokenLife } = require("../../config/keys").jwt;
+const { accessSecret, refreshTokenLife } = require("../../config/keys").jwt;
 
 const verifyDirectOTP = async (req, res, next) => {
   try {
@@ -29,7 +29,7 @@ const verifyDirectOTP = async (req, res, next) => {
       };
   
       // Generate access token and refresh token
-      const accessToken = generateAccessToken(payload, accessTokenLife);
+      const accessToken = generateAccessToken(payload, accessSecret);
       const token = generateRefreshToken(payload, refreshTokenLife);
       if (accessToken && token) {
         user.token = token; // add token to user
@@ -59,14 +59,12 @@ const verifyDirectOTP = async (req, res, next) => {
 // Function to generate access token
 const generateAccessToken = (user) => {
   return jwt.sign({ userId: user._id, email: user.email }, process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "15m", // Token expires in 15 minutes
   });
 };
 
 // Function to generate refresh token
 const generateRefreshToken = (user) => {
   return jwt.sign({ userId: user._id, email: user.email }, process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: "1y", // Token expires in 1 year
   });
 };
 

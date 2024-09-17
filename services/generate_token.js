@@ -4,14 +4,14 @@ const crypto = require("crypto");
 
 const { accessSecret, refreshSecret } = require("../config/keys").jwt;
 
-const generateAccessToken = (payload, expiresIn) => {
-  const token = jwt.sign(payload, accessSecret, { expiresIn });
+const generateAccessToken = (payload) => {
+  const token = jwt.sign(payload, accessSecret);
   if (!token) return createError.InternalServerError();
   return token;
 };
 
-const generateRefreshToken = (payload, expiresIn) => {
-  const token = jwt.sign(payload, refreshSecret, { expiresIn });
+const generateRefreshToken = (payload, ) => {
+  const token = jwt.sign(payload, refreshSecret);
   if (!token) return createError.InternalServerError();
   return token;
 };

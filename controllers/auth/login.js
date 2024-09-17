@@ -7,7 +7,7 @@ const {
   generateRefreshToken,
 } = require("../../services/generate_token");
 const { loginValidation } = require("../../services/validation_schema");
-const { accessTokenLife, refreshTokenLife } = require("../../config/keys").jwt;
+const { accessSecret } = require("../../config/keys").jwt;
 
 const loginUser = async (req, res, next) => {
   try {
@@ -29,13 +29,14 @@ const loginUser = async (req, res, next) => {
       role: userLogin.role,
     };
 
-    const accessToken = generateAccessToken(payload, accessTokenLife);
-    const token = generateRefreshToken(payload, refreshTokenLife);
-    if (accessToken && token) {
-      userLogin.token = token; // add token to userLogin
+    const accessToken = generateAccessToken(payload, accessSecret);
+    // const accessToken = generateRefreshToken(payload, refreshTokenLife);
+
+    if (accessToken) {
+      userLogin.accessToken = accessToken; // add accessToken to userLogin
       await userLogin.save(); // save the userLogin document
 
-      res.cookie("auth", token, { httpOnly: true });
+      res.cookie("auth", accessToken, { httpOnly: true });
 
       res.status(200).json({
         message: "Login successful !!",
