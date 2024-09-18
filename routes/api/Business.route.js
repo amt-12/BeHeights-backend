@@ -17,6 +17,8 @@ const addTopBusiness = require('../../controllers/addTopBusiness');
 const getAllTopBusinesses = require('../../controllers/getAllTopBusiness');
 const deleteTopBusiness = require('../../controllers/deleteTopBusiness');
 const getDropDown = require('../../controllers/getDropDown');
+const getBusinessByMail = require('../../controllers/getBusinessByMail');
+const getCouponsByTags = require('../../controllers/getCouponsByTags');
 
 const router = require('express').Router();
 
@@ -40,9 +42,12 @@ router.get('/getByTableTime', getByTableTime);
 router.post('/images', uploadImage)
 router.post('/businesses/:id', updateBusiness);
 router.post('/addBusinessCoupon/:id', addBusinessCoupon)
-//this api is adding new field coupon and sub offers in it 
+//this api is adding new field coupon and sub offers in it and this api is to add sub offers under business
 router.patch('/addNewOffer/:id', addNewOffer);
+router.get('/getCouponsByTags', getCouponsByTags);
 router.delete('/businesses/:id', deleteBusiness);
+
+router.get('/getBusinessByMail/:businessEmail', getBusinessByMail);
 
 
 

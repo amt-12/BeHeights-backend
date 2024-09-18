@@ -1,15 +1,5 @@
 const mongoose = require("mongoose");
 
-const couponSchema = new mongoose.Schema({
-  code: String,
-  offer: String,
-  subOffer: String,
-  price: Number,
-  validFor: String,
-  validTill: Date,
-  tags: [{ type: String }]
-});
-
 const businessAllSchema = new mongoose.Schema({
   businessName: {
     type: String,
@@ -22,6 +12,12 @@ const businessAllSchema = new mongoose.Schema({
   businessEmail: {
     type: String,
     required: true,
+    // validate: {
+    //   validator: (v) => {
+    //     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v);
+    //   },
+    //   message: (props) => `${props.value} is not a valid email!`,
+    // },
   },
   businessDescription: {
     type: String,
@@ -52,6 +48,7 @@ const businessAllSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  
   businessCity: {
     type: String,
     required: true,
@@ -106,16 +103,13 @@ const businessAllSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  locationUrl: {
-    type: String,
-    required: true,
+  coupon: {
+    type: {
+      offer: String,
+      subOffer: String,
+    },
   },
-  coupon: [couponSchema]
-});
-
-businessAllSchema.pre('save', function(next) {
-  this.businessEmail = this.businessEmail.toLowerCase();
-  next();
+  
 });
 
 const BusinessAll = mongoose.model("BusinessAll", businessAllSchema);

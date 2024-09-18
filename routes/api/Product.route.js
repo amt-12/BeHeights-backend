@@ -18,6 +18,7 @@ const checkAvailCoupon = require("../../controllers/product/checkAvailCoupon");
 const updateValidDate = require("../../controllers/product/updateValidDate");
 const addBannerProduct = require("../../controllers/product/addBannerProduct");
 const addLoversCategory = require("../../controllers/product/addLoversCategory");
+const getBusinessProducts = require("../../controllers/product/getBuinessProducts");
 const router = require("express").Router();
 
 router.post("/addProduct", addProduct);
@@ -34,6 +35,7 @@ router.put("/:id", updateProduct);
 router.put("/updateValid/:id", updateValidDate);
 router.delete("/:id", deleteProduct);
 router.get("/", getProducts);
+router.get("/getBusinessProducts", getBusinessProducts);
 router.get("/:id", getSingleProducts);
 router.post("/avail", availCoupon);
 router.get("/checkCouponAvail", checkAvailCoupon);

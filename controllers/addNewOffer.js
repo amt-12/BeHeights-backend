@@ -1,6 +1,5 @@
 const BusinessAll = require("../models/BuisnessAll.model");
 const TopBusiness = require("../models/TopBusiness.model");
-const { businessValidation } = require("../services/validation_schema");
 const { v4: uuidv4 } = require('uuid');
 
 const addNewOffer = async (req, res, next) => {
@@ -11,6 +10,7 @@ const addNewOffer = async (req, res, next) => {
     const newPrice = req.body.price;
     const newValidFor = req.body.validFor;
     const newValidTill = req.body.validTill;
+    const newTags = req.body.tags; // Get tags from the request body
 
     if (!businessId) {
       return res.status(400).json({
@@ -19,10 +19,10 @@ const addNewOffer = async (req, res, next) => {
       });
     }
 
-    if (!newOffer || !newSubOffer || !newPrice || !newValidFor || !newValidTill) {
+    if (!newOffer || !newSubOffer || !newPrice || !newValidFor || !newValidTill || !newTags) {
       return res.status(400).json({
         success: false,
-        message: "Please provide both new offer and sub offer",
+        message: "Please provide both new offer and sub offer, and tags",
       });
     }
 
@@ -34,7 +34,7 @@ const addNewOffer = async (req, res, next) => {
       });
     }
 
-    const uniqueCode = uuidv4().slice(0, 8).toUpperCase(); // Generate a unique 8-character code
+    const uniqueCode = Math.random().toString(36).substr(2, 8).toUpperCase();
 
     await BusinessAll.findByIdAndUpdate(businessId, {
       $push: {
@@ -44,23 +44,25 @@ const addNewOffer = async (req, res, next) => {
           subOffer: newSubOffer, 
           price: newPrice,
           validFor: newValidFor, 
-          validTill: newValidTill
+          validTill: newValidTill,
+          tags: newTags // Add tags to the coupon
         }
       }
     });
 
-      await TopBusiness.findByIdAndUpdate(businessId,{
-        $push: {
-          coupon: { 
-            code: uniqueCode,
-            offer: newOffer, 
-            subOffer: newSubOffer, 
-            price: newPrice,
-            validFor: newValidFor, 
-            validTill: newValidTill
-          }
+    await TopBusiness.findByIdAndUpdate(businessId,{
+      $push: {
+        coupon: { 
+          code: uniqueCode,
+          offer: newOffer, 
+          subOffer: newSubOffer, 
+          price: newPrice,
+          validFor: newValidFor, 
+          validTill: newValidTill,
+          tags: newTags // Add tags to the coupon
         }
-      });
+      }
+    });
     
     res.status(200).json({
       success: true,

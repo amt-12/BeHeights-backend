@@ -9,7 +9,7 @@ const { registerValidation } = require("../../services/validation_schema");
 const register = async (req, res, next) => {
   try {
     const result = await registerValidation.validateAsync(req.body);
-    const { name, phone, email, password } = result;
+    const { name, phone, email, password,gender } = result;
 
     const userExistingEmail = await User.findOne({
       email,
@@ -37,6 +37,7 @@ const register = async (req, res, next) => {
       phone,
       email,
       password: hashedPassword,
+      gender,
     });
     await user.save();
 

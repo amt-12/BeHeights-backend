@@ -4,10 +4,6 @@ const BusinessAll = require("../models/BuisnessAll.model");
 const getAllBusinesses = async (req, res, next) => {
   try {
     const { name, keyword, status } = req.query;
-    const { query } = req;
-    console.log(req.query)
-    const startIndex = (query.startIndex && parseInt(query.startIndex)) || 0;
-    const viewSize = (query.viewSize && parseInt(query.viewSize)) || 10;
     let searchCriteria = {};
 
     if (keyword) {
@@ -35,64 +31,14 @@ const getAllBusinesses = async (req, res, next) => {
       }
     }
 
-    const businesses = await BusinessAll.aggregate([
-      {
-        $match: searchCriteria,
-      },
-      {
-        $facet: {
-          data: [
-            {
-              $sort: {
-                createdAt: -1,
-              },
-            },
-            { $skip: startIndex },
-            { $limit: parseInt(viewSize) },
-          ],
-          count: [
-            {
-              $count: "total",
-            },
-          ],
-          activeCount: [
-            {
-              $match: {
-                $and: [searchCriteria, { isActive: true }],
-              },
-            },
-            {
-              $count: "active",
-            },
-          ],
-          inactiveCount: [
-            {
-              $match: {
-                $and: [searchCriteria, { isActive: false }],
-              },
-            },
-            {
-              $count: "inactive",
-            },
-          ],
-        },
-      },
-    ]);
+    const businesses = await BusinessAll.find(searchCriteria);
 
     res.json({
       success: true,
       status: 200,
       message: "Businesses fetched successfully",
-      count: businesses?.[0]?.count?.[0]?.total,
-      activeCount:
-        !!businesses?.[0]?.activeCount?.[0]?.active === false
-          ? 0
-          : businesses?.[0]?.activeCount?.[0]?.active,
-      inActiveCount:
-        !!businesses?.[0]?.inactiveCount?.[0]?.inactive === false
-          ? 0
-          : businesses?.[0]?.inactiveCount?.[0]?.inactive,
-      businesses: businesses?.[0]?.data,
+      count: businesses.length,
+      businesses: businesses,
     });
   } catch (error) {
     next(error);

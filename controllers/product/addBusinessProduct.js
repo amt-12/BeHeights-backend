@@ -1,6 +1,7 @@
 const Product = require("../../models/Product.model");
 const { productValidation, businessProductValidation } = require("../../services/validation_schema");
 const uploadFiles = require("../../services/upload-files");
+const BusinessCouponsAll = require("../../models/BuisnessCoupon.model");
 
 const addBusinessProduct = async (req, res, next) => {
   try {
@@ -23,7 +24,7 @@ const addBusinessProduct = async (req, res, next) => {
       validTill,
       role
     });
-    const product = new Product({ ...result, code: uniqueCode });
+    const product = new BusinessCouponsAll({ ...result, code: uniqueCode });
     await product.save();
     res.json({
       success: true,

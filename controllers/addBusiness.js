@@ -11,11 +11,22 @@ const addBusiness = async (req, res, next) => {
     const uniqueCode = Math.random().toString(36).substr(2, 8).toUpperCase();
     const {
       businessName,
-      businessType,
+      businessRegistration,
+      businessDescription,
+      businessAddress,
+      ownerName,
+      phone,
+      websiteUrl,
+      instagramUrl,
+      faceBookUrl,
+      customerServiceContact,
+      businessCity,
+      pinCode,
+      openingTime,
+      closingTime,
+      businessEmail,
+      businessOption,
       location,
-      typeFood,
-      costPerPerson,
-      tableTime,
       buffetPrice,
       isActive,
       image,
@@ -24,7 +35,11 @@ const addBusiness = async (req, res, next) => {
       offerPrice,
       offerDetail,
       validTill,
-      validFor,
+      businessgst,
+      coupon,
+      locationUrl
+      
+
     } = business;
     console.log(business)
 
@@ -38,11 +53,23 @@ const addBusiness = async (req, res, next) => {
 
     const businessData = new BusinessAll({
       businessName,
-      businessType,
+      businessEmail,
+      businessgst,
+      businessRegistration,
+      businessDescription,
+      businessAddress,
+      ownerName,
+      phone,
+      websiteUrl,
+      instagramUrl,
+      faceBookUrl,
+      customerServiceContact,
+      businessCity,
+      pinCode,
+      businessOption,
+      openingTime,
+      closingTime,
       location,
-      typeFood,
-      costPerPerson,
-      tableTime,
       buffetPrice,
       isActive,
       image,
@@ -51,8 +78,11 @@ const addBusiness = async (req, res, next) => {
       offerPrice,
       offerDetail,
       validTill,
-      validFor,
       uniqueCode,
+      image,
+      pinCode,
+      coupon,
+    locationUrl
     });
     await businessData.save();
     console.log(businessData);

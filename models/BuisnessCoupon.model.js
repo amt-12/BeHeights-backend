@@ -1,29 +1,44 @@
 const mongoose = require('mongoose');
 
-const businessCouponSchema = new mongoose.Schema({
-  businessOff: {
-    type: Number,
-  },
-  offerTitle: {
+const businessCouponAllSchema = new mongoose.Schema({
+  offer: {
     type: String,
+    required: true,
   },
-  offerPrice: {
-    type: Number,
-  },
-  offerDetail: {
+  subOffer: {
     type: String,
+    required: true,
+  },
+  uniqueCode: {
+    type: String,
+    required: true,
+  },
+  isAvail: {
+    type: Boolean,
+    default: false,
+  },
+  isExpired: {
+    type: Boolean,
+    default: false,
   },
   validTill: {
     type: Date,
+    required: true,
   },
-  validFor: {
+  role: {
     type: String,
-  },
-  coupon: {
-    type: [String],
-  },
+},
+limit:{
+  type:String,
+  // required:true
+},
+restaurantName:{
+  type:String
+},
+redeemedCount: { type: Number, default: 0 }, 
+
 });
 
-const BusinessCoupon = mongoose.model('BusinessCoupon', businessCouponSchema);
+const BusinessCouponsAll = mongoose.model('BusinessAllCoupon', businessCouponAllSchema);
 
-module.exports = BusinessCoupon;
+module.exports = BusinessCouponsAll;
