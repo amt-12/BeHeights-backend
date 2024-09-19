@@ -10,16 +10,17 @@ const deleteSubCategory = require("../../controllers/category/deleteSubCategory"
 const getSingleCategoryDetails = require("../../controllers/category/getSingleCategoryDetails");
 const getSubCategories = require("../../controllers/category/getSubCategories");
 const deleteSingleCategory = require("../../controllers/category/deleteSingleCategory");
+const checkAuth = require("../../middlewares/check-auth");
 
-router.post("/add", addCategory);
-router.post("/categories/:categoryId/subcategories", getSubCategories);
-router.delete("/categories/:categoryId", deleteSingleCategory);
-router.get("/getAllCategory", getAllCategory);
-router.delete("/:id", deleteCategory);
-router.put("/:id", updateCategory);
-router.get("/:id", getSingleCategory);
-router.get("/getSingleCategoryDetails/:id", getSingleCategoryDetails);
-router.post("/:categoryId", addSubCategory);
+router.post("/add",checkAuth, addCategory);
+router.post("/categories/:categoryId/subcategories",checkAuth, getSubCategories);
+router.delete("/categories/:categoryId",checkAuth, deleteSingleCategory);
+router.get("/getAllCategory",getAllCategory);
+router.delete("/:id",checkAuth, deleteCategory);
+router.put("/:id",checkAuth, updateCategory);
+router.get("/:id",checkAuth, getSingleCategory);
+router.get("/getSingleCategoryDetails/:id", checkAuth,getSingleCategoryDetails);
+router.post("/:categoryId",checkAuth, addSubCategory);
 
 
 

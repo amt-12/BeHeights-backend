@@ -12,17 +12,17 @@ const ResponseRoutes = require("./Response.route");
 const getbill = require("./GetOtp.route");
 const getbanner = require("./Banner.route");
 const addBusiness = require("./Business.route");
-const checkAuth = require("../../middlewares/check-auth");
+const checkAuth = require("../../middlewares/check-auth")
 
 
 
 
 
 router.use("/auth", authRoutes);
-router.use("/category",checkAuth, categoryRoutes);
-router.use("/product",checkAuth, productRoutes);
+router.use("/category", categoryRoutes);
+router.use("/product", productRoutes);
 router.use('/verify', getbill);
-router.use('/banner',checkAuth, getbanner);
+router.use('/banner', getbanner);
 router.use('/addBusiness',checkAuth, addBusiness);
 
 
