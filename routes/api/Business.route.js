@@ -19,35 +19,36 @@ const deleteTopBusiness = require('../../controllers/deleteTopBusiness');
 const getDropDown = require('../../controllers/getDropDown');
 const getBusinessByMail = require('../../controllers/getBusinessByMail');
 const getCouponsByTags = require('../../controllers/getCouponsByTags');
+const checkAuth = require("../../middlewares/check-auth")
 
 const router = require('express').Router();
 
 
 
 
-router.post('/add', addBusiness);
-router.post('/addTopBusiness', addTopBusiness);
-router.get('/getAllTopBusiness', getAllTopBusinesses);
-router.delete('/deleteTopBusiness/:id', deleteTopBusiness);
+router.post('/add',checkAuth, addBusiness);
+router.post('/addTopBusiness', checkAuth,addTopBusiness);
+router.get('/getAllTopBusiness',checkAuth, getAllTopBusinesses);
+router.delete('/deleteTopBusiness/:id',checkAuth, deleteTopBusiness);
 router.get('/get', getAllBusiness);
-router.get('/getDropDown', getDropDown);
-router.get('/get/:id', getSingleBusiness);
-router.get('/addLocation', addLocation);
-router.get('/getByLocation', getAllBusinessLocation);
-router.get('/getByTypeOfBusiness', getByTypeOfBusiness);
+router.get('/getDropDown',checkAuth, getDropDown);
+router.get('/get/:id', checkAuth,getSingleBusiness);
+router.get('/addLocation', checkAuth,addLocation);
+router.get('/getByLocation',checkAuth, getAllBusinessLocation);
+router.get('/getByTypeOfBusiness',checkAuth, getByTypeOfBusiness);
 //search by food
-router.get('/getByTypeOfFood', getByTypeOfFood);
-router.get('/getByBusiness', getByBusiness);
-router.get('/getByTableTime', getByTableTime);
-router.post('/images', uploadImage)
-router.post('/businesses/:id', updateBusiness);
-router.post('/addBusinessCoupon/:id', addBusinessCoupon)
+router.get('/getByTypeOfFood',checkAuth, getByTypeOfFood);
+router.get('/getByBusiness', checkAuth,getByBusiness);
+router.get('/getByTableTime', checkAuth,getByTableTime);
+router.post('/images', checkAuth,uploadImage)
+router.put('/businesses/:id', checkAuth,updateBusiness);
+router.post('/addBusinessCoupon/:id',checkAuth, addBusinessCoupon)
 //this api is adding new field coupon and sub offers in it and this api is to add sub offers under business
-router.patch('/addNewOffer/:id', addNewOffer);
-router.get('/getCouponsByTags', getCouponsByTags);
-router.delete('/businesses/:id', deleteBusiness);
+router.patch('/addNewOffer/:id', checkAuth,addNewOffer);
+router.get('/getCouponsByTags', checkAuth,getCouponsByTags);
+router.delete('/businesses/:id',checkAuth, deleteBusiness);
 
-router.get('/getBusinessByMail/:businessEmail', getBusinessByMail);
+router.get('/getBusinessByMail/:businessEmail',checkAuth, getBusinessByMail);
 
 
 

@@ -19,14 +19,21 @@ router.post("/registerOtp", registerOtp);
 router.post("/update", updateProfile);
 router.post("/updatePassword", updatePassword);
 router.post("/login", loginUser);
+
 router.post("/forgotPassword", forgotPassword);
+
+
+
+
+
+
 router.patch("/newPassword", newPassword);
 router.post("/sendOtp", sendOtp);
 router.put("/resetPassword/:token", resetPassword);
 router.post("/verifyOtp", verifyOtp);
 router.post("/verifyDirectOtp", verifyDirectOTP);
 router.post("/updateRole", updateRole);
-router.post("/updateProfile", updateProfile);
+router.put("/updateProfile", updateProfile);
 
 
 module.exports = router;

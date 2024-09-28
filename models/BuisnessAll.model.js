@@ -13,31 +13,30 @@ const couponSchema = new mongoose.Schema({
 const businessAllSchema = new mongoose.Schema({
   businessName: {
     type: String,
-    required: true,
+    
   },
   businessRegistration: {
     type: String,
-    required: true,
+    
   },
   businessEmail: {
     type: String,
-    required: true,
+    
   },
   businessDescription: {
     type: String,
-    required: true,
+    
   },
   businessAddress: {
     type: String,
-    required: true,
+    
   },
   ownerName: {
     type: String,
-    required: true,
+    
   },
   phone: {
     type: String,
-    required: true,
   },
   websiteUrl: {
     type: String,
@@ -50,55 +49,42 @@ const businessAllSchema = new mongoose.Schema({
   },
   customerServiceContact: {
     type: String,
-    required: true,
   },
   businessCity: {
     type: String,
-    required: true,
   },
   pinCode: {
     type: Number,
-    required: true,
   },
   businessOff: {
     type: Number,
-    required: true,
   },
   businessOption: {
     type: String,
-    required: true,
   },
   openingTime: {
     type: String,
-    required: true,
   },
   closingTime: {
     type: String,
-    required: true,
   },
   isActive: {
     type: Boolean,
-    required: true,
   },
   location: {
     type: String,
-    required: true,
   },
   offerDetail: {
     type: String,
-    required: true,
   },
   offerPrice: {
     type: Number,
-    required: true,
   },
   offerTitle: {
     type: String,
-    required: true,
   },
   validTill: {
     type: Date,
-    required: true,
   },
   businessgst: {
     type: String,
@@ -108,7 +94,6 @@ const businessAllSchema = new mongoose.Schema({
   },
   locationUrl: {
     type: String,
-    required: true,
   },
   coupon: [couponSchema]
 });

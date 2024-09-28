@@ -7,20 +7,19 @@ const updateProfile = async (req, res, next) => {
     const { phone, name, email } = req.body;
 
 
-    // Find the user by ID (assuming req.user is set by middleware)
-    const user = await User.findById(req.user.id);
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    // Check if the email already exists in the User model
+    const existingUserWithEmail = await User.findOne({ email });
+    if (!existingUserWithEmail ) {
+      return res.status(400).json({ message: "Email Not exists" });
     }
 
     // Update the user fields
-    user.phone = phone;
-    user.name = name;
-    user.email = email;
+    existingUserWithEmail.phone = phone;
+    existingUserWithEmail.name = name;
 
     // Save the updated user
-    await user.save();
+    await existingUserWithEmail.save();
 
     res.json({ message: "Profile updated successfully" });
   } catch (error) {

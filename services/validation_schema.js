@@ -40,6 +40,36 @@ const businessValidation = Joi.object({
   locationUrl: Joi.string().required(),
 
 });
+const businessUpdateValidation = Joi.object({
+  businessName: Joi.string(),
+  businessRegistration: Joi.string(),
+  businessEmail: Joi.string().email(),
+  businessDescription: Joi.string(),
+  businessAddress: Joi.string(),
+  ownerName: Joi.string(),
+  phone: Joi.string(),
+  websiteUrl: Joi.string().optional(),
+  instagramUrl: Joi.string().optional(),
+  faceBookUrl: Joi.string().optional(),
+  customerServiceContact: Joi.string(),
+  businessCity: Joi.string(),
+  pinCode: Joi.number(),
+  businessOff: Joi.number(),
+  businessOption: Joi.string(),
+  businessOption: Joi.string(),
+  openingTime: Joi.string(),
+  closingTime: Joi.string(),
+  isActive: Joi.boolean(),
+  location: Joi.string(),
+  offerDetail: Joi.string(),
+  offerPrice: Joi.number(),
+  offerTitle: Joi.string(),
+  validTill: Joi.date(),
+  businessgst:Joi.string(),
+  image:Joi.string(),
+  locationUrl: Joi.string(),
+
+});
 const businessCouponValidation = Joi.object({
   offerName: Joi.string(),
   offerDescription: Joi.string(),
@@ -287,5 +317,6 @@ module.exports = {
   businessCouponValidation,
   businessProductValidation,
   exclusiveOfferValidation,
-  productBannerValidation
+  productBannerValidation,
+  businessUpdateValidation
 };
