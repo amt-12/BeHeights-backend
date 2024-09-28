@@ -50,6 +50,7 @@ const addBusiness = async (req, res, next) => {
         message: "Business name already exists",
       });
     }
+    
 
     const businessData = new BusinessAll({
       businessName,
