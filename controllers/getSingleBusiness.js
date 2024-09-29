@@ -1,12 +1,12 @@
 const BusinessAll = require("../models/BuisnessAll.model");
-
+const { createError } = require('http-errors');
 const getSingleBusiness = async (req, res, next) => {
   try {
     const { id } = req.params;
     const business = await BusinessAll.findById(id);
 
     if (!business) {
-      return next(createError(404, "Business not found"));
+      throw new Error("Business not found");
     }
 
     res.json({

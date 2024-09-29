@@ -81,6 +81,7 @@ const updateValidation = Joi.object({
 });
 const bannerValidation = Joi.object({
   images: Joi.string(),
+  businessName: Joi.string(),
 });
 const OtpValidation = Joi.object({
   email: Joi.string().email().required(),

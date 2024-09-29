@@ -19,7 +19,8 @@ const deleteTopBusiness = require('../../controllers/deleteTopBusiness');
 const getDropDown = require('../../controllers/getDropDown');
 const getBusinessByMail = require('../../controllers/getBusinessByMail');
 const getCouponsByTags = require('../../controllers/getCouponsByTags');
-const checkAuth = require("../../middlewares/check-auth")
+const checkAuth = require("../../middlewares/check-auth");
+const getSingleBusinessName = require('../../controllers/getSingleBusinessName');
 
 const router = require('express').Router();
 
@@ -33,6 +34,7 @@ router.delete('/deleteTopBusiness/:id',checkAuth, deleteTopBusiness);
 router.get('/get', getAllBusiness);
 router.get('/getDropDown',checkAuth, getDropDown);
 router.get('/get/:id', checkAuth,getSingleBusiness);
+router.get('/getBusinessName/:businessName', checkAuth,getSingleBusinessName);
 router.get('/addLocation', checkAuth,addLocation);
 router.get('/getByLocation',checkAuth, getAllBusinessLocation);
 router.get('/getByTypeOfBusiness',checkAuth, getByTypeOfBusiness);

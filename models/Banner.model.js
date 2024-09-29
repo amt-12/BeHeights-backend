@@ -5,6 +5,9 @@ const bannerSchema = new Schema(
     images:{
       type: String,
       required: true,
+    },
+    businessName: {
+      type: String,
     }
   },
   {
