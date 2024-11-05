@@ -20,6 +20,7 @@ const availCoupon = async (req, res, next) => {
     updateAvailedCoupons();
 
     const userCoupon = await Product.findOne({ uniqueCode });
+    console.log(userCoupon?.restaurantName)
 
     if (userCoupon) {
       if (userCoupon.isAvail) {
@@ -45,9 +46,19 @@ const availCoupon = async (req, res, next) => {
     // Update the user's availed coupons
     const userUpdate = await User.findOneAndUpdate(
       { email: userEmail }, // Find user by email
-      { $push: { availedCoupons: uniqueCode }, couponAvail: true },
+      {
+        $push: {
+          availedCoupons: {
+            uniqueCode,
+            restaurantName: userCoupon?.restaurantName,
+            offer: userCoupon?.offer,
+          },
+        },
+        couponAvail: true,
+      },
       { new: true }
     );
+    
 
     // Update the coupon's redeemed count
     const couponUpdate = await Product.findOneAndUpdate(

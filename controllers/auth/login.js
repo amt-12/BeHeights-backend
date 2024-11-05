@@ -27,7 +27,8 @@ const loginUser = async (req, res, next) => {
       phone: userLogin.phone,
       email: userLogin.email,
       role: userLogin.role,
-      gender:userLogin.gender
+      gender:userLogin.gender,
+      image:userLogin.image
     };
 
     const accessToken = generateAccessToken(payload, accessSecret);

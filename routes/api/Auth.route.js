@@ -12,10 +12,12 @@ const updatePassword = require("../../controllers/user/updatePassword");
 const forgotPassword = require("../../controllers/auth/forgotPassword");
 const newPassword = require("../../controllers/auth/newPassword");
 const updateRole = require("../../controllers/auth/updateRole");
+const changePhoto = require("../../controllers/auth/changePhoto");
 
 
 router.post("/register", register);
 router.post("/registerOtp", registerOtp);
+router.put('/users/photo', changePhoto);
 router.post("/update", updateProfile);
 router.post("/updatePassword", updatePassword);
 router.post("/login", loginUser);

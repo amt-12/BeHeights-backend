@@ -19,7 +19,8 @@ const updateValidDate = require("../../controllers/product/updateValidDate");
 const addBannerProduct = require("../../controllers/product/addBannerProduct");
 const addLoversCategory = require("../../controllers/product/addLoversCategory");
 const getBusinessProducts = require("../../controllers/product/getBuinessProducts");
-const checkAuth = require("../../middlewares/check-auth")
+const checkAuth = require("../../middlewares/check-auth");
+const getAvailedCoupons = require("../../controllers/product/getAvailedCoupons");
 
 const router = require("express").Router();
 
@@ -40,6 +41,7 @@ router.get("/", getProducts);
 router.get("/getBusinessProducts",checkAuth, getBusinessProducts);
 router.get("/:id",checkAuth, getSingleProducts);
 router.post("/avail", checkAuth,availCoupon);
+router.get('/availedCoupons/:email',checkAuth, getAvailedCoupons);
 router.get("/checkCouponAvail", checkAuth,checkAvailCoupon);
 router.post("/availExclusiveOffer",checkAuth, availExclusiveOffer);
 router.delete("/:productId/:imageId",checkAuth, deleteImage);

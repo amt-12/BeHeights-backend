@@ -36,13 +36,20 @@ const UserSchema = new Schema(
     token:{
       type: String,
     },
-    availedCoupons: {
-      type: [String], // Define availedCoupons as an array of strings
-      default: [], // Initialize it with an empty array by default
-    },
+    availedCoupons: [
+      {
+        uniqueCode: String,
+        restaurantName: String,
+        offer: String,
+      },
+    ],
     gender: {
       type: String,
   },
+  image: {
+    type: String,
+    default: '', 
+},
   },
   {
     timestamps: true,
