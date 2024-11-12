@@ -1,5 +1,5 @@
 const express = require("express");
-const app = express(); ``
+const app = express(); 
 
 const http = require("http").Server(app);
 const chalk = require("chalk");
@@ -37,13 +37,18 @@ const mongoose = require("mongoose");
 const database = process.env.DB_CONNECT;
 
 mongoose
-  .connect(database)
+  .connect(database, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
   .then(() =>
-    console.log(`${chalk.green("✓")} ${chalk.blue("MongoDB Connected!")}`) 
+    console.log(`${chalk.green("✓")} ${chalk.blue("MongoDB Connected!")}`)
   )
   .then(() => {
     const PORT = process.env.PORT || 5001;
-    http.listen(PORT, () => {
+    const HOST = process.env.HOST;
+    http.listen(PORT, HOST, () => {
       console.log(
         `${chalk.green("✓")} ${chalk.blue(
           "Server Started on port"
@@ -51,4 +56,4 @@ mongoose
       );
     });
   })
-  .catch((err) => console.log("err",err));
+  .catch((err) => console.log(err));
