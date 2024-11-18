@@ -17,10 +17,16 @@ const loginUser = async (req, res, next) => {
     const userLogin = await User.findOne({ email, isVerified: true });
     if (!userLogin)
       throw createError.BadRequest("Email is not registered or not verified");
+
+
+
     const isMatch = await bcrypt.compare(password, userLogin.password);
     if (!isMatch) {
       throw createError.BadRequest("Incorrect password. Please try again.");
     }
+
+
+    
     const payload = {
       name: userLogin.name,
       _id: userLogin._id,

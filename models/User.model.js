@@ -11,7 +11,10 @@ const UserSchema = new Schema(
     password: {
       type: String,
       required: true,
-  },
+    },
+    confirmPassword: {
+      type: String,
+    },
     name: {
       type: String,
       required: true,
@@ -26,14 +29,14 @@ const UserSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin","business"],
+      enum: ["user", "admin", "business"],
       default: "user",
     },
     couponAvail: {
       type: Boolean,
       default: false,
     },
-    token:{
+    token: {
       type: String,
     },
     availedCoupons: [
@@ -45,11 +48,11 @@ const UserSchema = new Schema(
     ],
     gender: {
       type: String,
-  },
-  image: {
-    type: String,
-    default: '', 
-},
+    },
+    image: {
+      type: String,
+      default: "",
+    },
   },
   {
     timestamps: true,

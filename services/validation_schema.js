@@ -8,6 +8,7 @@ const registerValidation = Joi.object({
   role: Joi.string(),
   couponAvail: Joi.boolean(),
   gender:Joi.string(),
+  confirmPassword:Joi.string().required()
 
 });
 const businessValidation = Joi.object({

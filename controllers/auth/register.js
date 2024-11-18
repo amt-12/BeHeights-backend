@@ -9,7 +9,7 @@ const { registerValidation } = require("../../services/validation_schema");
 const register = async (req, res, next) => {
   try {
     const result = await registerValidation.validateAsync(req.body);
-    const { name, phone, email, password,gender } = result;
+    const { name, phone, email, password,confirmPassword,gender } = result;
 
     const userExistingEmail = await User.findOne({
       email,
@@ -28,15 +28,14 @@ const register = async (req, res, next) => {
         throw new Error(`${email} is already exist but not verified. Please verify your email.`);
       }
     }
-
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+c
 
     const user = new User({
       name,
       phone,
       email,
       password: hashedPassword,
+      confirmPassword : hashedPassword,
       gender,
     });
     await user.save();
