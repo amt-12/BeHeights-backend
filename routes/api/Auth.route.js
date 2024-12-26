@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const register = require("../../controllers/auth/register");
+const me = require("../../controllers/me");
 const loginUser = require("../../controllers/auth/login");
 const resetPassword = require("../../controllers/auth/resetPassword");
 const verifyOtp = require("../../controllers/auth/verifyOTP");
@@ -14,7 +15,7 @@ const newPassword = require("../../controllers/auth/newPassword");
 const updateRole = require("../../controllers/auth/updateRole");
 const changePhoto = require("../../controllers/auth/changePhoto");
 
-
+router.post("/me", me);
 router.post("/register", register);
 router.post("/registerOtp", registerOtp);
 router.put('/users/photo', changePhoto);
