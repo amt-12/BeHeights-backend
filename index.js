@@ -31,13 +31,13 @@ app.use(routes);
 
 
 
-// require("dotenv").config();
+require("dotenv").config();
 
 const mongoose = require("mongoose");
 const database = process.env.DB_CONNECT;
 
 mongoose
-  .connect("mongodb+srv://amrit0207232:Cdjj2NB7bRb16Y78@beheights.facpumu.mongodb.net/", {
+  .connect(database, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
