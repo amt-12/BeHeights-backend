@@ -13,6 +13,9 @@ router.use("/api", (req, res, next) => {
     createError.NotFound("The route you are trying to access does not exist.")
   );
 });
+app.listen(80, '0.0.0.0', () => {
+  console.log('Server running on http://159.65.153.167');
+});
 
 // eslint-disable-next-line no-unused-vars
 router.use((error, req, res, next) => {
