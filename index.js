@@ -1,5 +1,5 @@
 const express = require("express");
-const app = express(); 
+const app = express();
 require("dotenv").config();
 const http = require("http").Server(app);
 const chalk = require("chalk");
@@ -12,29 +12,25 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 const routes = require("./routes");
 
-
-
 app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-app.use(cors({
-  origin: '*',
-  credentials: true,
-  optionsSuccessStatus: 200,
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-}));
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    optionsSuccessStatus: 200,
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+  })
+);
 
 app.use(cookieParser());
 app.use(morgan("combined"));
 
-app.use(routes); 
+app.use(routes);
 
 // app.listen(80, '0.0.0.0', () => {
 //   console.log('Server running on http://159.65.153.167');
 // });
-
-
-require("dotenv").config();
-
 const mongoose = require("mongoose");
 const database = process.env.DB_CONNECT;
 
