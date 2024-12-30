@@ -28,7 +28,9 @@ app.use(morgan("combined"));
 
 app.use(routes); 
 
-
+app.listen(80, '0.0.0.0', () => {
+  console.log('Server running on http://159.65.153.167');
+});
 
 
 require("dotenv").config();
@@ -37,7 +39,7 @@ const mongoose = require("mongoose");
 const database = process.env.DB_CONNECT;
 
 mongoose
-  .connect("mongodb+srv://amrit0207232:Cdjj2NB7bRb16Y78@beheights.facpumu.mongodb.net/", {
+  .connect(database, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
