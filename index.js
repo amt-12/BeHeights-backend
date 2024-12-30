@@ -28,9 +28,9 @@ app.use(morgan("combined"));
 
 app.use(routes); 
 
-app.listen(80, '0.0.0.0', () => {
-  console.log('Server running on http://159.65.153.167');
-});
+// app.listen(80, '0.0.0.0', () => {
+//   console.log('Server running on http://159.65.153.167');
+// });
 
 
 require("dotenv").config();
@@ -48,7 +48,7 @@ mongoose
     console.log(`${chalk.green("✓")} ${chalk.blue("MongoDB Connected!")}`)
   )
   .then(() => {
-    const PORT = process.env.PORT || 5001;
+    const PORT = process.env.PORT || 5000;
     const HOST = process.env.HOST;
     http.listen(PORT, HOST, () => {
       console.log(
