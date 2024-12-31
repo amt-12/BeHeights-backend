@@ -28,7 +28,6 @@ const register = async (req, res, next) => {
         throw new Error(`${email} is already exist but not verified. Please verify your email.`);
       }
     }
-c
 
     const user = new User({
       name,
