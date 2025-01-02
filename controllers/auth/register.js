@@ -28,6 +28,7 @@ const register = async (req, res, next) => {
         throw new Error(`${email} is already exist but not verified. Please verify your email.`);
       }
     }
+const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({
       name,
