@@ -17,7 +17,7 @@ const register = async (req, res, next) => {
     const userExistingPhone = await User.findOne({
       phone,
     });
-    if (userExistingPhone && userExistingPhone.isVerified === true ) {
+    if (userExistingPhone ) {
       throw new Error(`${phone} is already exist. Please login.`);
     }
 
@@ -32,7 +32,7 @@ const register = async (req, res, next) => {
     //     );
     //   }
     // }
-    if (userExistingEmail && userExistingEmail.isVerified === true) {
+    if (userExistingEmail ) {
       throw new Error(`${email} is already exist. Please login.`);
     }
     const hashedPassword = await bcrypt.hash(password, 10);
