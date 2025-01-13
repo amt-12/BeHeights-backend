@@ -3,10 +3,6 @@ const crypto = require("crypto");
 const Otp = require("../models/Otp.model");
 
 
-const generateOTP = () => {
-  return Math.floor(1000 + Math.random() * 9000).toString();
-};
-
 
 const getbill = (req, res) => {
   const { email } = req.body;
@@ -17,8 +13,12 @@ const getbill = (req, res) => {
     });
   }
 
+  const generateOTP = () => {
+    return Math.floor(1000 + Math.random() * 9000).toString();
+  };
+  
   const otp = generateOTP();
-
+console.log(otp);
   const otpDoc = new Otp({ email, otp });
   otpDoc.save((err) => {
     if (err) {

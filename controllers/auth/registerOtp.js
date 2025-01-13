@@ -11,6 +11,11 @@ const registerOtp = async (req, res, next) => {
   try {
     const result = await OtpValidation.validateAsync(req.body);
     const { email } = result;
+    const user = await User.findOne({ email });
+    if (user) {
+      throw createError.BadRequest("This email is not registered");
+    }
+
 
     res.status(200).json({
       message: "OTP Sent successfully",

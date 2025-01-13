@@ -10,28 +10,37 @@ const { email, password } = require('../config/keys').nodemailer;
 const sendEmail = (recipients, subject, template) => {
   return new Promise((resolve, reject) => {
     try {
-      const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
+  const otp = generateOTP();
+
+      let config = {
+        service: "gmail",
         auth: {
-          user: email,
-          pass: password,
+          user: "amrit0207232@gmail.com",
+          pass: "rdouazscqsinlxlh",
         },
-      });
-
-      const mailOptions = {
-        from: email,
-        to: recipients.join(','),
-        subject,
-        html: template,
       };
+    let transporter = nodemailer.createTransport(config);
 
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          return reject(error);
-        }
-        resolve();
+  
+      let message = {
+        from: "amrit0207232@gmail.com",
+        to: email, 
+        subject: "Your OTP",
+        text: `Your OTP is: ${otp}`,
+        html: `<b>Your OTP is: ${otp}</b>`,
+      };
+     
+      transporter
+      .sendMail(message)
+      .then(() => {
+        return res.status(200).json({
+          msg: "OTP sent to your email successfully!",
+          email: email, 
+          success: true,
+        });
+      })
+      .catch((error) => {
+        return res.status(500).json({ error });
       });
     } catch (error) {
       return reject(error);
@@ -39,15 +48,5 @@ const sendEmail = (recipients, subject, template) => {
   });
 };
 
-const generateOTP = () => {
-  var digits = "0123456789";
-  var otpLength = 6;
-  var otp = "";
-  for (let i = 1; i <= otpLength; i++) {
-    var index = Math.floor(Math.random() * digits.length);
-    otp = otp + digits[index];
-  }
-  return otp;
-};
 
-module.exports = { sendEmail, generateOTP };
+module.exports = { sendEmail };

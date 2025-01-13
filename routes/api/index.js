@@ -25,7 +25,6 @@ router.use('/banner', getbanner);
 router.use('/addBusiness', addBusiness);
 
 
-
 router.get("/ping", (req, res) => {
   res.json({ success: "true", message: "successful request" });
 });
