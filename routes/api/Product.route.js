@@ -37,7 +37,7 @@ router.get("/stats/count", checkAuth,statusCount);
 router.put("/:id", checkAuth,updateProduct);
 router.put("/updateValid/:id",checkAuth, updateValidDate);
 router.delete("/:id",checkAuth, deleteProduct);
-router.get("/", getProducts);
+router.get("/",checkAuth, getProducts);
 router.get("/getBusinessProducts",checkAuth, getBusinessProducts);
 router.get("/:id",checkAuth, getSingleProducts);
 router.post("/avail", checkAuth,availCoupon);
