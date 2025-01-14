@@ -8,6 +8,7 @@ const verifyDirectOTP = async (req, res, next) => {
   try {
     const { email, otp } = req.body;
 
+
     const resetotp = await Otp.findOne({
       email,
       otp,
@@ -15,7 +16,6 @@ const verifyDirectOTP = async (req, res, next) => {
     
     console.log(req.body);
     if (resetotp?.otp === otp) {
-      // Update User model with isVerified set to true and role set to "user"
       const user = await Otp.findOneAndUpdate({ email }, { isVerified: true, role: "user" }, { new: true });
       if (!user) {
         return res.status(404).json({ message: "User not found" });
@@ -28,7 +28,6 @@ const verifyDirectOTP = async (req, res, next) => {
         role: user.role,
       };
   
-      // Generate access token and refresh token
       const accessToken = generateAccessToken(payload, accessSecret);
       const token = generateRefreshToken(payload, refreshTokenLife);
       if (accessToken && token) {
