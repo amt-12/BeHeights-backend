@@ -44,5 +44,6 @@ router.post("/avail", checkAuth,availCoupon);
 router.get('/availedCoupons/:email',checkAuth, getAvailedCoupons);
 router.get("/checkCouponAvail", checkAuth,checkAvailCoupon);
 router.post("/availExclusiveOffer",checkAuth, availExclusiveOffer);
+
 router.delete("/:productId/:imageId",checkAuth, deleteImage);
 module.exports = router;
