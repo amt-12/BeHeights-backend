@@ -49,6 +49,7 @@ const loginUser = async (req, res, next) => {
       res.status(200).json({
         message: "Login successful !!",
         success: true,
+        role: userLogin.role,
         accessToken,
         user: payload,
       });

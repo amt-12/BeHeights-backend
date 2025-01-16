@@ -19,31 +19,30 @@ const updateValidDate = require("../../controllers/product/updateValidDate");
 const addBannerProduct = require("../../controllers/product/addBannerProduct");
 const addLoversCategory = require("../../controllers/product/addLoversCategory");
 const getBusinessProducts = require("../../controllers/product/getBuinessProducts");
-const checkAuth = require("../../middlewares/check-auth");
 const getAvailedCoupons = require("../../controllers/product/getAvailedCoupons");
 
 const router = require("express").Router();
 
-router.post("/addProduct",checkAuth, addProduct);
-router.post("/addBannerProduct",checkAuth, addBannerProduct);
-router.post("/addBusinessProduct",checkAuth, addBusinessProduct);
-router.post("/addExclusiveCoupon",checkAuth, addExclusiveCoupon);
-router.post("/addLoversCategory", checkAuth,addLoversCategory);// currently working
-router.post("/updateExclusiveCoupon/:id",checkAuth, updateExclusiveCoupon);
-router.delete("/deleteExclusiveCoupon/:id",checkAuth, deleteExclusiveOffer);
-router.get('/exclusive-offers', checkAuth,getExclusiveOffers);
-router.put("/:id/status", checkAuth,statusChange);
-router.get("/stats/count", checkAuth,statusCount);
-router.put("/:id", checkAuth,updateProduct);
-router.put("/updateValid/:id",checkAuth, updateValidDate);
-router.delete("/:id",checkAuth, deleteProduct);
-router.get("/",checkAuth, getProducts);
-router.get("/getBusinessProducts",checkAuth, getBusinessProducts);
-router.get("/:id",checkAuth, getSingleProducts);
-router.post("/avail", checkAuth,availCoupon);
-router.get('/availedCoupons/:email',checkAuth, getAvailedCoupons);
-router.get("/checkCouponAvail", checkAuth,checkAvailCoupon);
-router.post("/availExclusiveOffer",checkAuth, availExclusiveOffer);
+router.post("/addProduct", addProduct);
+router.post("/addBannerProduct", addBannerProduct);
+router.post("/addBusinessProduct", addBusinessProduct);
+router.post("/addExclusiveCoupon", addExclusiveCoupon);
+router.post("/addLoversCategory", addLoversCategory);// currently working
+router.post("/updateExclusiveCoupon/:id", updateExclusiveCoupon);
+router.delete("/deleteExclusiveCoupon/:id", deleteExclusiveOffer);
+router.get('/exclusive-offers', getExclusiveOffers);
+router.put("/:id/status", statusChange);
+router.get("/stats/count", statusCount);
+router.put("/:id", updateProduct);
+router.put("/updateValid/:id", updateValidDate);
+router.delete("/:id", deleteProduct);
+router.get("/", getProducts);
+router.get("/getBusinessProducts", getBusinessProducts);
+router.get("/:id", getSingleProducts);
+router.post("/avail", availCoupon);
+router.get('/availedCoupons/:email', getAvailedCoupons);
+router.get("/checkCouponAvail", checkAvailCoupon);
+router.post("/availExclusiveOffer", availExclusiveOffer);
 
-router.delete("/:productId/:imageId",checkAuth, deleteImage);
+router.delete("/:productId/:imageId", deleteImage);
 module.exports = router;

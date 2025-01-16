@@ -9,8 +9,7 @@ const verifyOtp = async (req, res, next) => {
       email,
       otp,
     });
-    
-    console.log(req.body.otp);
+
     if (resetotp?.otp === req.body.otp) {
       const user = await User.findOneAndUpdate({ email }, { isVerified: true }, { new: true });
       if (!user) {

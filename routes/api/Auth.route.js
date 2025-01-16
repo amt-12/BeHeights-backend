@@ -26,10 +26,6 @@ router.post("/login", loginUser);
 router.post("/forgotPassword", forgotPassword);
 
 
-
-
-
-
 router.patch("/newPassword", newPassword);
 router.post("/sendOtp", sendOtp);
 router.put("/resetPassword/:token", resetPassword);
