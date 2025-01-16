@@ -17,7 +17,6 @@ const checkAuth = require("../../middlewares/check-auth");
 
 
 
-
 router.use("/auth", authRoutes);
 router.use("/category", categoryRoutes);
 router.use("/product",checkAuth, productRoutes);
