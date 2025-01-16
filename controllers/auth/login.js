@@ -41,8 +41,8 @@ const loginUser = async (req, res, next) => {
     // const accessToken = generateRefreshToken(payload, refreshTokenLife);
 
     if (accessToken) {
-      userLogin.accessToken = accessToken; // add accessToken to userLogin
-      await userLogin.save(); // save the userLogin document
+      userLogin.accessToken = accessToken; 
+      await userLogin.save(); 
 
       res.cookie("auth", accessToken, { httpOnly: true });
 
