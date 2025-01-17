@@ -15,6 +15,7 @@ const loginUser = async (req, res, next) => {
     const { email, password } = result;
 
     const userLogin = await User.findOne({ email, isVerified: true });
+    console.log(userLogin);
     if (!userLogin)
       throw createError.BadRequest("Email is not registered or not verified");
 
@@ -24,8 +25,6 @@ const loginUser = async (req, res, next) => {
     if (!isMatch) {
       throw createError.BadRequest("Incorrect password. Please try again.");
     }
-
-
     
     const payload = {
       name: userLogin.name,
@@ -38,13 +37,10 @@ const loginUser = async (req, res, next) => {
     };
 
     const accessToken = generateAccessToken(payload, accessSecret);
-    // const accessToken = generateRefreshToken(payload, refreshTokenLife);
+
 
     if (accessToken) {
-      userLogin.accessToken = accessToken; 
       await userLogin.save(); 
-
-      res.cookie("auth", accessToken, { httpOnly: true });
 
       res.status(200).json({
         message: "Login successful !!",
@@ -55,7 +51,6 @@ const loginUser = async (req, res, next) => {
       });
     }
   } catch (error) {
-    if (error.isJoi === true) error.status = 422;
     next(error);
   }
 };
