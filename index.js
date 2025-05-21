@@ -35,7 +35,7 @@ const mongoose = require("mongoose");
 const database = process.env.DB_CONNECT;
 
 mongoose
-  .connect("mongodb+srv://amrit0207232:Cdjj2NB7bRb16Y78@beheights.facpumu.mongodb.net/", {
+  .connect("mongodb+srv://mehaksandhu713:OBmsTHDgAjdn1mHv@bhagwant1.gqjjddb.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
